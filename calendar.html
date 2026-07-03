@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar — CoaLab ART ADVISORY</title>
+<meta name="description" content="世界の主要アートフェアの年間カレンダー。CoaLab ART ADVISORY。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">CoaLab<span class="logo-sub">ART ADVISORY</span></span>
+    </a>
+
+    <nav class="nav" id="primaryNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="journal.html">Journal</a></li>
+        <li><a href="calendar.html" class="is-active">Calendar</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <button class="lang-toggle" id="langToggle" aria-label="Language toggle">
+        <span class="lang-ja">EN</span><span class="lang-en">JA</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Page Hero ===== -->
+<section class="page-hero" style="background-image:url('images/architecture-curves.jpg')">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner container">
+    <p class="page-hero-label">CALENDAR</p>
+    <h1 class="page-hero-title">
+      <span class="lang-ja">アートフェア年間カレンダー</span>
+      <span class="lang-en">Annual Art Fair Calendar</span>
+    </h1>
+  </div>
+</section>
+
+<!-- ===== Calendar ===== -->
+<section class="section calendar" id="calendar">
+  <div class="container narrow">
+    <div class="section-heading center">
+      <p class="section-label">
+        <span class="lang-ja">— CALENDAR</span><span class="lang-en">— CALENDAR</span>
+      </p>
+      <h2 class="section-title">
+        <span class="lang-ja">世界の主要アートフェア</span>
+        <span class="lang-en">Major Art Fairs of the World</span>
+      </h2>
+      <p class="section-lead">
+        <span class="lang-ja">例年の開催時期に基づく年間スケジュールです。正確な日程は各フェアの公式サイトをご確認ください。視察同行のご相談も承ります。</span>
+        <span class="lang-en">An annual overview based on each fair's usual season. Please confirm exact dates on official websites. We also welcome inquiries about accompanied visits.</span>
+      </p>
+    </div>
+
+    <div class="calendar-list">
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">3月</span><span class="lang-en">March</span></h3>
+        <ul>
+          <li><span class="fair-name">アートフェア東京</span><span class="fair-city"><span class="lang-ja">東京</span><span class="lang-en">Tokyo</span></span></li>
+          <li><span class="fair-name">Art Basel Hong Kong</span><span class="fair-city"><span class="lang-ja">香港</span><span class="lang-en">Hong Kong</span></span></li>
+          <li><span class="fair-name">TEFAF Maastricht</span><span class="fair-city"><span class="lang-ja">マーストリヒト</span><span class="lang-en">Maastricht</span></span></li>
+        </ul>
+      </div>
+
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">5月</span><span class="lang-en">May</span></h3>
+        <ul>
+          <li><span class="fair-name">Frieze New York</span><span class="fair-city"><span class="lang-ja">ニューヨーク</span><span class="lang-en">New York</span></span></li>
+          <li><span class="fair-name">TEFAF New York</span><span class="fair-city"><span class="lang-ja">ニューヨーク</span><span class="lang-en">New York</span></span></li>
+        </ul>
+      </div>
+
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">6月</span><span class="lang-en">June</span></h3>
+        <ul>
+          <li><span class="fair-name">Art Basel</span><span class="fair-city"><span class="lang-ja">バーゼル</span><span class="lang-en">Basel</span></span></li>
+        </ul>
+      </div>
+
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">7月</span><span class="lang-en">July</span></h3>
+        <ul>
+          <li><span class="fair-name">Tokyo Gendai</span><span class="fair-city"><span class="lang-ja">横浜</span><span class="lang-en">Yokohama</span></span></li>
+        </ul>
+      </div>
+
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">9月</span><span class="lang-en">September</span></h3>
+        <ul>
+          <li><span class="fair-name">Frieze Seoul</span><span class="fair-city"><span class="lang-ja">ソウル</span><span class="lang-en">Seoul</span></span></li>
+          <li><span class="fair-name">Kiaf SEOUL</span><span class="fair-city"><span class="lang-ja">ソウル</span><span class="lang-en">Seoul</span></span></li>
+        </ul>
+      </div>
+
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">10月</span><span class="lang-en">October</span></h3>
+        <ul>
+          <li><span class="fair-name">Frieze London</span><span class="fair-city"><span class="lang-ja">ロンドン</span><span class="lang-en">London</span></span></li>
+          <li><span class="fair-name">Art Basel Paris</span><span class="fair-city"><span class="lang-ja">パリ</span><span class="lang-en">Paris</span></span></li>
+        </ul>
+      </div>
+
+      <div class="calendar-month">
+        <h3 class="calendar-month-label"><span class="lang-ja">12月</span><span class="lang-en">December</span></h3>
+        <ul>
+          <li><span class="fair-name">Art Basel Miami Beach</span><span class="fair-city"><span class="lang-ja">マイアミビーチ</span><span class="lang-en">Miami Beach</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">COALAB — ART ADVISORY</p>
+        <p class="footer-tagline">
+          <span class="lang-ja">アートと、共に在る暮らしへ。</span>
+          <span class="lang-en">A life, lived alongside art.</span>
+        </p>
+      </div>
+      <div class="footer-meta">
+        <p>© CoaLab All rights reserved.</p>
+        <p>
+          <span class="lang-ja">本サイトの写真は、当アドバイザリーが訪問したフェア・展覧会の記録です。</span>
+          <span class="lang-en">All photographs are records of fairs and exhibitions visited by this advisory.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
