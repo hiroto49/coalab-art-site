@@ -957,3 +957,110 @@ body {
 /* iOSのフォーカス時自動ズームを防ぐ（16px未満だと発動する） */
 .form-field input,
 .form-field textarea { font-size: 16px; }
+
+/* ===== Instagram feed (モック — 実運用はウィジェット/Graph API に差し替え) ===== */
+.instagram { background: var(--color-bg); }
+.instagram .section-label { display: inline-block; }
+
+.ig-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid var(--color-line-soft);
+}
+
+.ig-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+.ig-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--serif-en);
+  font-size: 22px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.ig-id { display: flex; flex-direction: column; line-height: 1.4; min-width: 0; }
+.ig-handle {
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.ig-handle:hover { color: var(--color-accent); }
+.ig-name {
+  font-size: 11px;
+  color: var(--color-ink-soft);
+  letter-spacing: 0.06em;
+}
+.ig-follow {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+  text-decoration: none;
+  border: 1px solid var(--color-ink);
+  padding: 7px 16px;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.ig-follow:hover { background: var(--color-ink); color: #fff; }
+
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  background: #fff;
+}
+.ig-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.ig-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s var(--ease);
+}
+.ig-tile:hover img { opacity: 0.82; }
+
+/* Instagram側で「ピン留め」された投稿の想定（先頭3コマ） */
+.ig-tile.is-pinned::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(26,26,26,0.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M14.6 2.6l6.8 6.8-2 .9-3.4 3.4.3 4.3-1.6 1.6-4.2-4.2-5.6 5.7-1.4-1.4 5.7-5.6-4.2-4.2 1.6-1.6 4.3.3 3.4-3.4z'/%3E%3C/svg%3E") center / 11px no-repeat;
+}
+
+.ig-more {
+  display: block;
+  text-align: center;
+  padding: 16px 20px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  border-top: 1px solid var(--color-line-soft);
+  transition: color 0.3s var(--ease);
+}
+.ig-more:hover { color: var(--color-accent); }
+
+@media (max-width: 640px) {
+  .ig-header { padding: 14px 16px; }
+  .ig-grid { gap: 2px; }
+}
