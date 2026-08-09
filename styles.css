@@ -8,25 +8,26 @@ ul, ol, dl { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3, h4, p { margin: 0; }
 
 /* ===================================================================
-   Palette — Powder Petal / Deep Mocha（クライアント指定色）
+   Palette — White / Gray（2026-08 クライアント指定：背景=白、帯=グレー）
+   旧 Powder Petal 配色は git 履歴参照
    =================================================================== */
 :root {
-  --color-bg: #F5EFEC;        /* Powder Petal を明度上げた地色 */
-  --color-bg-alt: #E1D0C9;    /* Powder Petal */
-  --color-surface: #FBF8F6;   /* カード、タイル */
-  --color-ink: #3D2E2B;       /* Deep Mocha */
-  --color-ink-soft: #6E5A54;
-  --color-line: #C9B2A8;
-  --color-line-soft: #E6D8D2;
-  --color-accent: #8A6A5E;
-  --color-footer-bg: #3D2E2B;
-  --color-footer-ink: rgba(225,208,201,0.82);
-  --bg-rgb: 245, 239, 236;    /* ヘッダーの背景（スクロール時） */
-  --overlay-rgb: 61, 46, 43;  /* 写真のオーバーレイと影 */
+  --color-bg: #FFFFFF;        /* 地色：白 */
+  --color-bg-alt: #EDEDED;    /* 淡グレーの帯 */
+  --color-surface: #FAFAFA;   /* カード、タイル */
+  --color-ink: #212121;
+  --color-ink-soft: #5C5C5C;
+  --color-line: #C7C7C7;
+  --color-line-soft: #E5E5E5;
+  --color-accent: #757575;
+  --color-footer-bg: #808080; /* フッター帯：グレー */
+  --color-footer-ink: rgba(255,255,255,0.9);
+  --bg-rgb: 255, 255, 255;    /* ヘッダーの背景（スクロール時） */
+  --overlay-rgb: 32, 32, 32;  /* 写真のオーバーレイと影 */
 
   /* 写真の上に乗る文字・線は常に明色 */
-  --color-on-dark: #F5EFEC;
-  --on-dark-rgb: 245, 239, 236;
+  --color-on-dark: #FFFFFF;
+  --on-dark-rgb: 255, 255, 255;
 
   --serif-jp: "Noto Serif JP", "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", serif;
   --serif-en: "Cormorant Garamond", "Georgia", serif;
@@ -413,6 +414,13 @@ body {
   background-position: center;
 }
 .service-body { padding: 40px 36px 44px; }
+.service-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 22px;
+  color: var(--color-accent);
+}
+.service-icon svg { width: 100%; height: 100%; }
 .service-num {
   font-family: var(--serif-en);
   font-style: italic;
@@ -1057,7 +1065,7 @@ body {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(var(--overlay-rgb),0.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F5EFEC'%3E%3Cpath d='M14.6 2.6l6.8 6.8-2 .9-3.4 3.4.3 4.3-1.6 1.6-4.2-4.2-5.6 5.7-1.4-1.4 5.7-5.6-4.2-4.2 1.6-1.6 4.3.3 3.4-3.4z'/%3E%3C/svg%3E") center / 11px no-repeat;
+  background: rgba(var(--overlay-rgb),0.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Cpath d='M14.6 2.6l6.8 6.8-2 .9-3.4 3.4.3 4.3-1.6 1.6-4.2-4.2-5.6 5.7-1.4-1.4 5.7-5.6-4.2-4.2 1.6-1.6 4.3.3 3.4-3.4z'/%3E%3C/svg%3E") center / 11px no-repeat;
 }
 
 .ig-more {
