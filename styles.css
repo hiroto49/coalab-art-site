@@ -797,6 +797,15 @@ body {
 
 /* ===== Calendar ===== */
 .calendar { background: var(--color-bg); }
+.calendar-year {
+  font-family: var(--serif-en);
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 0.14em;
+  text-align: center;
+  color: var(--color-ink);
+  margin-bottom: 36px;
+}
 .calendar-list { border-top: 1px solid var(--color-line); }
 .calendar-month {
   display: grid;
@@ -833,6 +842,12 @@ body {
   letter-spacing: 0.04em;
 }
 [data-lang="en"] .fair-name { font-family: var(--serif-en); font-size: 18px; }
+.fair-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-shrink: 0;
+}
 .fair-city {
   font-family: var(--sans-en);
   font-size: 11px;
@@ -841,11 +856,25 @@ body {
   color: var(--color-ink-soft);
   white-space: nowrap;
 }
+.fair-date {
+  font-family: var(--sans-en);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  white-space: nowrap;
+  min-width: 72px;
+  text-align: right;
+}
 
 /* ===== Subpage responsive ===== */
 @media (max-width: 900px) {
   .journal-list { grid-template-columns: 1fr; }
   .calendar-month { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (max-width: 600px) {
+  .calendar-month li { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .fair-meta { gap: 14px; }
+  .fair-date { min-width: 0; text-align: left; }
 }
 
 /* ===== Contact form (placeholder) ===== */
