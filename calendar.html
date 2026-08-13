@@ -69,6 +69,8 @@
       </p>
     </div>
 
+    <!-- 下記はGoogleスプレッドシート連携のフォールバック。シートの読み込みに成功すると丸ごと差し替わります -->
+    <div id="calendarData">
     <h3 class="calendar-year"><span class="lang-ja">2026年</span><span class="lang-en">2026</span></h3>
 
     <div class="calendar-list">
@@ -156,8 +158,85 @@
         </ul>
       </div>
     </div>
+    </div><!-- /#calendarData -->
   </div>
 </section>
+
+<!-- Googleスプレッドシート連携: シート編集がそのままサイトに反映される（失敗時は上記の静的リストを表示） -->
+<script>
+(function () {
+  var SHEET_ID = '1jkQ2qT4b66PGtj1sQqmMGNZ7J5slEuAKADwXZXuLDCM';
+  var GID = '1179452228';
+  var MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MONTHS_ABBR = ['Jan.','Feb.','Mar.','Apr.','May','Jun.','Jul.','Aug.','Sep.','Oct.','Nov.','Dec.'];
+
+  function esc(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // 「10月中旬」→「Mid-Oct.」のような和文日程の英訳（数字日程はそのまま）
+  function dateEn(d) {
+    var m = d.match(/^(\d{1,2})月(上旬|中旬|下旬)$/);
+    if (!m) return d;
+    var abbr = MONTHS_ABBR[parseInt(m[1], 10) - 1];
+    return { '上旬': 'Early ' + abbr, '中旬': 'Mid-' + abbr, '下旬': 'Late ' + abbr }[m[2]];
+  }
+
+  function render(fairs) {
+    var byYear = {};
+    fairs.forEach(function (f) {
+      (byYear[f.year] = byYear[f.year] || {});
+      (byYear[f.year][f.month] = byYear[f.year][f.month] || []).push(f);
+    });
+    var html = '';
+    Object.keys(byYear).sort(function (a, b) { return a - b; }).forEach(function (year) {
+      html += '<h3 class="calendar-year"><span class="lang-ja">' + year + '年</span><span class="lang-en">' + year + '</span></h3>';
+      html += '<div class="calendar-list">';
+      Object.keys(byYear[year]).sort(function (a, b) { return a - b; }).forEach(function (month) {
+        html += '<div class="calendar-month"><h3 class="calendar-month-label"><span class="lang-ja">' + month + '月</span><span class="lang-en">' + MONTHS_EN[month - 1] + '</span></h3><ul>';
+        byYear[year][month].forEach(function (f) {
+          var name = /^https?:\/\//.test(f.url)
+            ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.name) + '</a>'
+            : esc(f.name);
+          var li = '<li><span class="fair-name">' + name + '</span><span class="fair-meta">';
+          if (f.cityJa || f.cityEn) {
+            li += '<span class="fair-city"><span class="lang-ja">' + esc(f.cityJa) + '</span><span class="lang-en">' + esc(f.cityEn) + '</span></span>';
+          }
+          if (f.date) {
+            var en = dateEn(f.date);
+            var disp = esc(f.date.replace(/-/g, '–'));
+            li += en !== f.date
+              ? '<span class="fair-date"><span class="lang-ja">' + disp + '</span><span class="lang-en">' + esc(en) + '</span></span>'
+              : '<span class="fair-date">' + disp + '</span>';
+          }
+          li += '</span></li>';
+          html += li;
+        });
+        html += '</ul></div>';
+      });
+      html += '</div>';
+    });
+    document.getElementById('calendarData').innerHTML = html;
+  }
+
+  fetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?gid=' + GID + '&tqx=out:json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function (text) {
+      var m = text.match(/setResponse\(([\s\S]*)\)/);
+      if (!m) throw new Error('unexpected gviz response');
+      var rows = (JSON.parse(m[1]).table.rows || []).map(function (r) {
+        return (r.c || []).map(function (c) { return c && c.v != null ? String(c.v).trim() : ''; });
+      });
+      var fairs = rows.map(function (r) {
+        return { year: parseInt(r[0], 10), month: parseInt(r[1], 10), name: r[2] || '', cityJa: r[3] || '', cityEn: r[4] || '', date: r[5] || '', url: r[6] || '' };
+      }).filter(function (f) { return f.year > 0 && f.month >= 1 && f.month <= 12 && f.name; });
+      if (fairs.length) render(fairs);
+    })
+    .catch(function () { /* シートが読めないときは静的フォールバックをそのまま表示 */ });
+})();
+</script>
 
 <!-- ===== Footer ===== -->
 <footer class="site-footer">
