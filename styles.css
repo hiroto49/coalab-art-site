@@ -384,6 +384,7 @@ body {
   padding-bottom: 36px;
   border-bottom: 1px solid var(--color-line);
 }
+.concept-text .lead p + p { margin-top: 1.5em; }
 [data-lang="en"] .concept-text .lead { font-family: var(--serif-en); font-size: 20px; line-height: 1.7; }
 .concept-list li {
   margin-bottom: 36px;

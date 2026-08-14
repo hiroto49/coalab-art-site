@@ -115,7 +115,7 @@
   // 段落・見出しの最終行が1〜2文字だけになる場合、その要素の右余白を
   // 少しずつ（最大28px）足して折り返し位置をずらし、字余りを解消する。
   // CSSのtext-wrapで直りきらないケースの保険。画面幅が変わるたびに再計算。
-  const ORPHAN_SELECTOR = '.section p, .section dd, .section h2, .section h3, .statement-body p, .section-lead, .lead';
+  const ORPHAN_SELECTOR = '.section p, .section dd, .section h2, .section h3, .statement-body p, .section-lead, .lead p';
   const lastLineCount = (el) => {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const lines = new Map(); // 行のY位置 -> その行の文字列
