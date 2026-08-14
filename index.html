@@ -203,7 +203,7 @@
 
     <div class="ig-card">
       <div class="ig-header">
-        <span class="ig-avatar">C</span>
+        <span class="ig-avatar" id="igAvatar">C</span>
         <div class="ig-id">
           <a class="ig-handle" href="https://www.instagram.com/coalabart/" target="_blank" rel="noopener">@coalabart</a>
           <span class="ig-name">CoaLab ART ADVISORY</span>
@@ -213,7 +213,8 @@
         </a>
       </div>
 
-      <div class="ig-grid">
+      <!-- 下記3タイルはフォールバック。Behold連携で投稿が取得できると差し替わります -->
+      <div class="ig-grid" id="igGrid">
         <a class="ig-tile is-pinned" href="https://www.instagram.com/coalabart/" target="_blank" rel="noopener"><img src="images/exhibition-signage.jpg" alt="" loading="lazy"></a>
         <a class="ig-tile is-pinned" href="https://www.instagram.com/coalabart/" target="_blank" rel="noopener"><img src="images/salon-hang.jpg" alt="" loading="lazy"></a>
         <a class="ig-tile is-pinned" href="https://www.instagram.com/coalabart/" target="_blank" rel="noopener"><img src="images/installation-fair.jpg" alt="" loading="lazy"></a>
@@ -246,5 +247,40 @@
 </footer>
 
 <script src="script.js"></script>
+
+<!-- Instagram連携 (Behold JSONフィード): 最新投稿でタイルを差し替え。
+     取得失敗・0件（例: コラボ投稿はAPI対象外）の間は上の静的タイルを表示 -->
+<script>
+(function () {
+  var FEED_URL = 'https://feeds.behold.so/tSVUAa0IjbqtCO68K0wp';
+  var grid = document.getElementById('igGrid');
+  if (!grid || !window.fetch) return;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  fetch(FEED_URL)
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      var avatar = document.getElementById('igAvatar');
+      if (avatar && /^https?:\/\//.test(data.profilePictureUrl || '')) {
+        avatar.innerHTML = '<img src="' + esc(data.profilePictureUrl) + '" alt="@coalabart">';
+      }
+      var posts = (data.posts || []).slice(0, 3);
+      if (!posts.length) return;
+      grid.innerHTML = posts.map(function (p) {
+        var img = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.mediaUrl || '';
+        var alt = p.altText || p.prunedCaption || '';
+        if (!img || !/^https?:\/\//.test(p.permalink || '')) return '';
+        return '<a class="ig-tile" href="' + esc(p.permalink) + '" target="_blank" rel="noopener">'
+          + '<img src="' + esc(img) + '" alt="' + esc(alt.slice(0, 120)) + '" loading="lazy"></a>';
+      }).join('');
+    })
+    .catch(function () { /* フォールバック表示のまま */ });
+})();
+</script>
 </body>
 </html>
