@@ -111,6 +111,66 @@
     });
   }
 
+  // ===== 字余りガード =====
+  // 段落・見出しの最終行が1〜2文字だけになる場合、その要素の右余白を
+  // 少しずつ（最大28px）足して折り返し位置をずらし、字余りを解消する。
+  // CSSのtext-wrapで直りきらないケースの保険。画面幅が変わるたびに再計算。
+  const ORPHAN_SELECTOR = '.section p, .section dd, .section h2, .section h3, .statement-body p, .section-lead, .lead';
+  const lastLineCount = (el) => {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const lines = new Map(); // 行のY位置 -> その行の文字列
+    let node;
+    while ((node = walker.nextNode())) {
+      const text = node.textContent;
+      for (let i = 0; i < text.length; i++) {
+        if (/\s/.test(text[i])) continue;
+        const range = document.createRange();
+        range.setStart(node, i);
+        range.setEnd(node, i + 1);
+        const rect = range.getClientRects()[0];
+        if (!rect || rect.width === 0) continue; // 非表示言語のspan等
+        const key = Math.round(rect.top / 8) * 8;
+        lines.set(key, (lines.get(key) || '') + text[i]);
+      }
+    }
+    if (lines.size < 2) return null; // 1行以下なら対象外
+    const lastKey = Math.max(...lines.keys());
+    // 句読点・記号を除いた実質の文字数で判定（「ます。」=2文字 扱い）
+    return lines.get(lastKey).replace(/[、。・．，「」『』（）()！？!?.,—–-]/g, '').length;
+  };
+  const fixOrphans = () => {
+    document.querySelectorAll(ORPHAN_SELECTOR).forEach((el) => {
+      el.style.paddingRight = '';
+      el.style.paddingLeft = '';
+      const count = lastLineCount(el);
+      if (count === null || count > 2) return;
+      const centered = getComputedStyle(el).textAlign === 'center';
+      for (let pad = 4; pad <= 28; pad += 4) {
+        if (centered) {
+          el.style.paddingLeft = (pad / 2) + 'px';
+          el.style.paddingRight = (pad / 2) + 'px';
+        } else {
+          el.style.paddingRight = pad + 'px';
+        }
+        const now = lastLineCount(el);
+        if (now === null || now > 2) return; // 解消できたら確定
+      }
+      el.style.paddingRight = ''; // 解消できなければ元に戻す
+      el.style.paddingLeft = '';
+    });
+  };
+  let orphanTimer = null;
+  const scheduleOrphanFix = () => {
+    if (orphanTimer) clearTimeout(orphanTimer);
+    orphanTimer = setTimeout(fixOrphans, 150);
+  };
+  window.addEventListener('resize', scheduleOrphanFix);
+  if (langToggle) langToggle.addEventListener('click', scheduleOrphanFix);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(scheduleOrphanFix); // Webフォント適用後に実測
+  }
+  scheduleOrphanFix();
+
   // ===== Reveal on scroll (subtle) =====
   if ('IntersectionObserver' in window) {
     const obs = new IntersectionObserver((entries) => {
