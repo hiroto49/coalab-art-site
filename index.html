@@ -203,7 +203,7 @@
 
     <div class="ig-card">
       <div class="ig-header">
-        <span class="ig-avatar">C</span>
+        <span class="ig-avatar" id="igAvatar">C</span>
         <div class="ig-id">
           <a class="ig-handle" href="https://www.instagram.com/coalabart/" target="_blank" rel="noopener">@coalabart</a>
           <span class="ig-name">CoaLab ART ADVISORY</span>
@@ -265,6 +265,10 @@
   fetch(FEED_URL)
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
+      var avatar = document.getElementById('igAvatar');
+      if (avatar && /^https?:\/\//.test(data.profilePictureUrl || '')) {
+        avatar.innerHTML = '<img src="' + esc(data.profilePictureUrl) + '" alt="@coalabart">';
+      }
       var posts = (data.posts || []).slice(0, 3);
       if (!posts.length) return;
       grid.innerHTML = posts.map(function (p) {
