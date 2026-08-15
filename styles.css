@@ -49,6 +49,9 @@ h1, h2, h3, .section-title, .hero-title, .page-hero-title, .profile-name {
 p, dd, .section-lead, .lead {
   text-wrap: pretty;
 }
+/* 文節単位の折り返し固定: .pwで囲んだ語句の途中では改行しない
+   （Safariはword-break: auto-phrase非対応のため、重要な見出しは明示指定） */
+.pw { display: inline-block; }
 body {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -477,6 +480,7 @@ body {
   font-size: 13px;
   letter-spacing: 0.18em;
   color: var(--color-accent);
+  margin-left: 14px;
 }
 .profile-text p {
   font-size: 15.5px;
@@ -677,8 +681,13 @@ body {
   .menu-toggle { display: block; }
 
   .concept-grid { grid-template-columns: 1fr; gap: 48px; }
-  .concept-image { position: static; }
+  /* モバイルではヒーロー画像の直後に写真が重ならないよう、本文の後ろに回す */
+  .concept-image { position: static; order: 2; }
+  .concept-text { order: 1; }
   .concept-image img { height: 380px; }
+
+  /* 肩書は名前の下に1行で（途中改行しない） */
+  .profile-name small { display: block; margin-left: 0; margin-top: 12px; }
 
   .services-grid { grid-template-columns: 1fr; gap: 32px; }
   .service-thumb { height: 240px; }
