@@ -741,10 +741,11 @@ body {
      行を埋めながら折り返させる（語の途中で切れないよう .pw で語句を保護している） */
   .section-lead:not(.lead-fixed) br { display: none; }
 
-  /* .lead-fixed は改行位置を指定どおり保つ箇所。一番長い行が折り返さないよう
-     画面幅に合わせて文字サイズを縮める */
+  /* .lead-fixed は改行位置を指定どおり保つ箇所。一番長い行が折り返さないよう、
+     その行の文字数（--lead-units）から必要な文字サイズを逆算する。
+     16pxを上限、9.5pxを下限とし、極端に狭い端末では折り返しを許容する */
   .section-lead.lead-fixed {
-    font-size: clamp(10.5px, 3.3vw, 16px);
+    font-size: max(9px, min(16px, calc((100vw - 44px) / var(--lead-units, 26))));
     letter-spacing: 0;
   }
 
