@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260815">
+<link rel="stylesheet" href="styles.css?v=20260817">
 </head>
 <body>
 
@@ -44,14 +44,12 @@
 <!-- ===== Hero ===== -->
 <section class="hero" id="top">
   <div class="hero-slides" id="heroSlides">
-    <div class="hero-slide is-active" style="background-image:url('images/atrium-architecture.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/gallery-interior.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/gallery-scene.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/installation-fair.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/sculpture-red.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/interior-architecture.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/architecture-curves.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('images/salon-hang.jpg')"></div>
+    <!-- 「アートと、共にある暮らしへ。」— 生活空間の中にアートがある写真（クライアント支給 Photos-1-001） -->
+    <div class="hero-slide is-active" style="background-image:url('images/hero-living-dining.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/hero-living-room.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/hero-great-room.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/hero-billiard-room.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/hero-entrance.jpg')"></div>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -117,63 +115,14 @@
       </p>
     </div>
 
+    <!-- 縦写真は縦長のマス、横写真は横長のマスに配置し、隙間なく長方形に組む -->
     <div class="gallery-grid">
-      <figure class="gallery-item">
-        <img src="images/exhibition-signage.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">Hung Hsien『Between Worlds』／ Asia Society Hong Kong</span>
-          <span class="lang-en">Hung Hsien, “Between Worlds” / Asia Society Hong Kong</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/installation-fair.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">現代アートフェア、ブース風景</span>
-          <span class="lang-en">A booth view at a contemporary art fair</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/painting-weber.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">Max Weber『Group of Figures』（1911）</span>
-          <span class="lang-en">Max Weber, “Group of Figures” (1911)</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/painting-duchamp.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">Marcel Duchamp 関連、肖像作品より</span>
-          <span class="lang-en">From a portrait related to Marcel Duchamp</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/abstract-colorful.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">現代アートフェア、抽象作品</span>
-          <span class="lang-en">An abstract work, contemporary fair</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/salon-hang.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">サロン・スタイルの展示風景</span>
-          <span class="lang-en">Salon-style hang, private interior</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/gallery-scene.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">プライベートギャラリー・ツアー</span>
-          <span class="lang-en">A private gallery tour</span>
-        </figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="images/museum-caption.jpg" alt="">
-        <figcaption>
-          <span class="lang-ja">Mark Rothko『Untitled (Purple, White, and Red)』（1953）</span>
-          <span class="lang-en">Mark Rothko, “Untitled (Purple, White, and Red)” (1953)</span>
-        </figcaption>
-      </figure>
+      <figure class="gallery-item is-tall"><img src="images/record-tefaf.jpg" alt="" loading="lazy"></figure>
+      <figure class="gallery-item is-wide"><img src="images/record-grand-palais.jpg" alt="" loading="lazy"></figure>
+      <figure class="gallery-item is-wide"><img src="images/record-viewing.jpg" alt="" loading="lazy"></figure>
+      <figure class="gallery-item is-tall"><img src="images/record-art-basel.jpg" alt="" loading="lazy"></figure>
+      <figure class="gallery-item is-tall"><img src="images/record-miami.jpg" alt="" loading="lazy"></figure>
+      <figure class="gallery-item is-wide"><img src="images/record-sculpture.jpg" alt="" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -237,7 +186,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=20260815"></script>
+<script src="script.js?v=20260817"></script>
 
 <!-- Instagram連携 (Behold JSONフィード): 最新投稿でタイルを差し替え。
      取得失敗・0件（例: コラボ投稿はAPI対象外）の間は上の静的タイルを表示 -->
