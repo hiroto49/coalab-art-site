@@ -765,9 +765,7 @@ body {
   font-size: 15px;
   line-height: 2;
   color: var(--color-ink-soft);
-  margin-bottom: 40px;
 }
-.journal-notice .hero-cta { color: var(--color-ink); border-color: currentColor; }
 @media (max-width: 540px) {
   .journal-notice { padding: 56px 24px 60px; }
   .journal-notice-title { font-size: 21px; }
