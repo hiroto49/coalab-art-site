@@ -112,7 +112,7 @@ body {
   font-size: 16px;
   line-height: 2;
   color: var(--color-ink-soft);
-  max-width: 640px;
+  max-width: 720px; /* 明示的な<br>の行が意図しない位置で折り返さない幅 */
   margin: 0 auto 60px;
 }
 .section-heading { margin-bottom: 60px; }
