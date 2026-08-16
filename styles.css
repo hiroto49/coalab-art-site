@@ -736,6 +736,43 @@ body {
   .hero-title { font-size: 32px; }
 }
 
+/* ===== Journal: 記事公開前の告知ブロック ===== */
+.journal-notice {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 72px 32px 76px;
+  text-align: center;
+  border: 1px solid var(--color-line-soft);
+  background: var(--color-surface);
+}
+.journal-notice-label {
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+.journal-notice-title {
+  font-family: var(--serif-jp);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+[data-lang="en"] .journal-notice-title { font-family: var(--serif-en); font-size: 27px; }
+.journal-notice-text {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--color-ink-soft);
+  margin-bottom: 40px;
+}
+.journal-notice .hero-cta { color: var(--color-ink); border-color: currentColor; }
+@media (max-width: 540px) {
+  .journal-notice { padding: 56px 24px 60px; }
+  .journal-notice-title { font-size: 21px; }
+}
+
 /* ===== Works（実績サムネイル） ===== */
 .works { background: var(--color-bg-alt); }
 .works-grid {
