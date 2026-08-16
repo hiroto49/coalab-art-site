@@ -732,6 +732,13 @@ body {
   .profile-meta > div { grid-template-columns: 1fr; gap: 4px; }
   /* 「共にある暮らしへ。」が2行に割れないサイズに */
   .hero-title { font-size: 32px; }
+
+  /* 縦長画面では横幅の3割ほどしか映らないため、各写真で作品が写る位置を中央に寄せる */
+  .hero-slide:nth-child(1) { background-position: 92% center; } /* 右手の大きな肖像画 */
+  .hero-slide:nth-child(2) { background-position: 26% center; } /* 壁に並ぶ人物画 */
+  .hero-slide:nth-child(3) { background-position: 70% center; } /* 額が密集する壁 */
+  .hero-slide:nth-child(4) { background-position: 26% center; } /* 左壁の絵とビリヤード台 */
+  .hero-slide:nth-child(5) { background-position: 4% center; }  /* 玄関正面の作品 */
 }
 
 /* ===== Journal: 記事公開前の告知ブロック ===== */
