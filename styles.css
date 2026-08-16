@@ -737,6 +737,10 @@ body {
      svh はアドレスバーの伸縮で高さが跳ねないようにするため（非対応環境は上のvhを使う） */
   .hero { height: 74vh; height: 74svh; min-height: 480px; }
 
+  /* PC用の改行指定は狭い画面だと「改行＋折り返し」で行が細切れになるため無効化し、
+     行を埋めながら折り返させる（語の途中で切れないよう .pw で語句を保護している） */
+  .section-lead br { display: none; }
+
   /* 縦長画面では横幅の3割ほどしか映らないため、各写真で作品が写る位置を中央に寄せる */
   .hero-slide:nth-child(1) { background-position: 92% center; } /* 右手の大きな肖像画 */
   .hero-slide:nth-child(2) { background-position: 26% center; } /* 壁に並ぶ人物画 */
