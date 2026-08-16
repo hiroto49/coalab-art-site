@@ -733,6 +733,10 @@ body {
   /* 「共にある暮らしへ。」が2行に割れないサイズに */
   .hero-title { font-size: 32px; }
 
+  /* 縦長すぎる画面では横長写真がほとんど切り落とされるため高さを抑える。
+     svh はアドレスバーの伸縮で高さが跳ねないようにするため（非対応環境は上のvhを使う） */
+  .hero { height: 74vh; height: 74svh; min-height: 480px; }
+
   /* 縦長画面では横幅の3割ほどしか映らないため、各写真で作品が写る位置を中央に寄せる */
   .hero-slide:nth-child(1) { background-position: 92% center; } /* 右手の大きな肖像画 */
   .hero-slide:nth-child(2) { background-position: 26% center; } /* 壁に並ぶ人物画 */
