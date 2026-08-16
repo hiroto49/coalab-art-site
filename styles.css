@@ -739,7 +739,14 @@ body {
 
   /* PC用の改行指定は狭い画面だと「改行＋折り返し」で行が細切れになるため無効化し、
      行を埋めながら折り返させる（語の途中で切れないよう .pw で語句を保護している） */
-  .section-lead br { display: none; }
+  .section-lead:not(.lead-fixed) br { display: none; }
+
+  /* .lead-fixed は改行位置を指定どおり保つ箇所。一番長い行が折り返さないよう
+     画面幅に合わせて文字サイズを縮める */
+  .section-lead.lead-fixed {
+    font-size: clamp(10.5px, 3.3vw, 16px);
+    letter-spacing: 0;
+  }
 
   /* 縦長画面では横幅の3割ほどしか映らないため、各写真で作品が写る位置を中央に寄せる */
   .hero-slide:nth-child(1) { background-position: 92% center; } /* 右手の大きな肖像画 */
