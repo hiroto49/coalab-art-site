@@ -1,0 +1,41 @@
+# main に変更が入るたび、お名前.com レンタルサーバーへ自動アップロードする
+#
+# 事前準備（GitHub の Settings → Secrets and variables → Actions で登録）
+#   FTP_SERVER    例: ftp.coalabart.com（お名前.comコントロールパネルのFTP情報を参照）
+#   FTP_USERNAME  例: xxxxxxxx@gmoserver.jp
+#   FTP_PASSWORD  FTPアカウントのパスワード
+#   FTP_DIR       公開ディレクトリ。お名前.comは /public_html/<ドメイン名>/ 形式
+#                 例: /public_html/coalabart.com/
+name: Deploy to onamae.com
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # 手動実行も可能
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_DIR }}
+          protocol: ftps
+          # サイトに不要なものはアップロードしない
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/NOTES.md
+            **/README.md
+            **/.DS_Store
