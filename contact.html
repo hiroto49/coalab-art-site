@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260818c">
+<link rel="stylesheet" href="styles.css?v=20260818e">
 </head>
 <body>
 
@@ -64,8 +64,19 @@
       <span class="lang-en">From a first quiet question about a work, to the long care of an existing collection — please feel free to begin a conversation. Available in Japanese and English.</span>
     </p>
 
-    <!-- ===== Contact Form（ハリボテ：送信処理は未接続） ===== -->
-    <form class="contact-form" id="contactForm" novalidate>
+    <!-- ===== Contact Form =====
+      送信は FormSubmit 経由で info@coalabart.com に届きます。
+      初回のみ、同アドレス宛に届く確認メールのリンクを開いて有効化が必要です。
+      JSが動く環境では下の action を使わず ajax エンドポイントへ送信し、
+      ページ内に完了メッセージを出します（script.js 参照）。 -->
+    <form class="contact-form" id="contactForm" novalidate
+          action="https://formsubmit.co/info@coalabart.com" method="POST">
+      <input type="hidden" name="_subject" value="【CoaLab】ウェブサイトからのお問い合わせ">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://hiroto49.github.io/coalab-art-site/contact.html?sent=1">
+      <!-- 迷惑送信よけ。人には見えない欄で、埋まっていれば破棄される -->
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="form-honey">
       <div class="form-row">
         <div class="form-field">
           <label for="cfName"><span class="lang-ja">お名前</span><span class="lang-en">Name</span><em>*</em></label>
@@ -92,6 +103,10 @@
       <p class="form-thanks" id="formThanks" hidden>
         <span class="lang-ja">送信ありがとうございました。追ってご連絡いたします。</span>
         <span class="lang-en">Thank you for your message. We will be in touch shortly.</span>
+      </p>
+      <p class="form-error" id="formError" hidden>
+        <span class="lang-ja">送信できませんでした。お手数ですが info@coalabart.com までご連絡ください。</span>
+        <span class="lang-en">The message could not be sent. Please write to info@coalabart.com instead.</span>
       </p>
     </form>
 
@@ -140,6 +155,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=20260818c"></script>
+<script src="script.js?v=20260818e"></script>
 </body>
 </html>
