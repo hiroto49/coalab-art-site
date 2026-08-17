@@ -96,18 +96,56 @@
     });
   }
 
-  // ===== Contact form (placeholder: no backend yet) =====
+  // ===== Contact form =====
+  // FormSubmit の ajax エンドポイントへ送信し、ページ内で完了を伝える。
+  // 通信に失敗した場合は form の action へ通常送信でフォールバックする。
   const contactForm = document.getElementById('contactForm');
   const formThanks = document.getElementById('formThanks');
+  const formError = document.getElementById('formError');
   if (contactForm && formThanks) {
+    const submitButton = contactForm.querySelector('.form-button');
+    const buttonLabel = submitButton ? submitButton.innerHTML : '';
+
+    // 非JS環境用の _next で戻ってきたときも完了メッセージを出す
+    if (location.search.indexOf('sent=1') > -1) formThanks.hidden = false;
+
     contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
       if (!contactForm.checkValidity()) {
+        e.preventDefault();
         contactForm.reportValidity();
         return;
       }
-      contactForm.reset();
-      formThanks.hidden = false;
+      if (!window.fetch) return; // 通常送信に任せる
+      e.preventDefault();
+
+      formThanks.hidden = true;
+      if (formError) formError.hidden = true;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = document.documentElement.getAttribute('data-lang') === 'en' ? 'SENDING…' : '送信中…';
+      }
+
+      const action = contactForm.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
+      fetch(action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      })
+        .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(() => {
+          contactForm.reset();
+          formThanks.hidden = false;
+        })
+        .catch(() => {
+          if (formError) formError.hidden = false;
+          else contactForm.submit();
+        })
+        .then(() => {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.innerHTML = buttonLabel;
+          }
+        });
     });
   }
 

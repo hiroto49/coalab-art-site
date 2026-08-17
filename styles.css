@@ -714,8 +714,11 @@ body {
 }
 
 @media (max-width: 540px) {
-  /* 9枚なので狭い画面でも3列を維持する（2列だと最下段が欠ける） */
-  .gallery-grid { gap: 8px; }
+  /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に。
+     9枚は2で割り切れないので、先頭の1枚を横いっぱいに使って下端を揃える */
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .gallery-item:first-child { grid-column: span 2; }
+  .gallery-item:first-child img { aspect-ratio: 4 / 3; }
   .profile-meta > div { grid-template-columns: 1fr; gap: 4px; }
   /* 「共にある暮らしへ。」が2行に割れないサイズに */
   .hero-title { font-size: 32px; }
@@ -1050,6 +1053,21 @@ body {
   margin-top: 28px;
   font-size: 15px;
   color: var(--color-accent);
+}
+.form-error {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 15px;
+  color: #9B3A3A;
+}
+/* 迷惑送信よけの囮欄。画面にも読み上げにも出さない */
+.form-honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 @media (max-width: 660px) {
   .form-row { grid-template-columns: 1fr; gap: 0; }
