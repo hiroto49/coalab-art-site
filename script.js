@@ -132,7 +132,10 @@
         body: new FormData(contactForm)
       })
         .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(() => {
+        .then((data) => {
+          // 未有効化などの失敗時も HTTP 200 で success:"false" が返るため中身で判定する
+          const ok = data && (data.success === true || String(data.success) === 'true');
+          if (!ok) throw new Error((data && data.message) || 'not delivered');
           contactForm.reset();
           formThanks.hidden = false;
         })
