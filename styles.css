@@ -753,7 +753,6 @@ body {
 @media (max-width: 960px) {
   /* クライアント要望: スマホでも PC 同様に本文を中央揃え */
   .statement-body p { text-align: center; }
-  .statement-body .pw { white-space: nowrap; }
 }
 @media (max-width: 640px) {
   /* 「住空間を埋める単なる装飾物ではありません。」を1行に収めるため少し小さく */
