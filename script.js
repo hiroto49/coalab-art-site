@@ -28,23 +28,24 @@
     });
   }
 
-  // ===== Hero slideshow =====
+  // ===== Hero slideshow（手動送り：自動再生なし。矢印・ドット・スワイプ・←→キーで操作） =====
+  const hero = document.getElementById('top');
   const slides = Array.from(document.querySelectorAll('.hero-slide'));
   const dotsContainer = document.getElementById('heroDots');
+  const prevBtn = document.getElementById('heroPrev');
+  const nextBtn = document.getElementById('heroNext');
   let currentSlide = 0;
-  let slideTimer = null;
 
   if (slides.length > 1 && dotsContainer) {
-    slides.forEach((_, i) => {
+    const dots = slides.map((_, i) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.setAttribute('aria-label', `Slide ${i + 1}`);
       if (i === 0) btn.classList.add('is-active');
       btn.addEventListener('click', () => goToSlide(i));
       dotsContainer.appendChild(btn);
+      return btn;
     });
-
-    const dots = Array.from(dotsContainer.children);
 
     const goToSlide = (idx) => {
       slides[currentSlide].classList.remove('is-active');
@@ -52,19 +53,28 @@
       currentSlide = (idx + slides.length) % slides.length;
       slides[currentSlide].classList.add('is-active');
       dots[currentSlide].classList.add('is-active');
-      restartTimer();
     };
-
     const next = () => goToSlide(currentSlide + 1);
+    const prev = () => goToSlide(currentSlide - 1);
 
-    const restartTimer = () => {
-      if (slideTimer) clearInterval(slideTimer);
-      slideTimer = setInterval(next, 6000);
-    };
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
 
-    restartTimer();
-    dotsContainer.querySelectorAll('button').forEach((btn, i) => {
-      btn.addEventListener('click', () => goToSlide(i));
+    // スワイプ（スマホ）
+    let touchX = null;
+    hero.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    }, { passive: true });
+
+    // キーボード
+    document.addEventListener('keydown', (e) => {
+      if (e.target.closest('input, textarea')) return;
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
     });
   }
 
@@ -180,9 +190,12 @@
     return lines.get(lastKey).replace(/[、。・．，「」『』（）()！？!?.,—–-]/g, '').length;
   };
   const fixOrphans = () => {
+    // スマホでは段落ごとに右余白が変わると行末が揃わず不揃いに見えるため、処理しない
+    const narrow = window.innerWidth <= 640;
     document.querySelectorAll(ORPHAN_SELECTOR).forEach((el) => {
       el.style.paddingRight = '';
       el.style.paddingLeft = '';
+      if (narrow) return;
       const count = lastLineCount(el);
       if (count === null || count > 2) return;
       const centered = getComputedStyle(el).textAlign === 'center';
