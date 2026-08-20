@@ -1,0 +1,37 @@
+# CoaLab ART ADVISORY — 検索エンジン・URL 整理
+#
+# 1) https://www.coalabart.com/ に正規化（apex / http からは 301）
+# 2) 旧 Wix サイト時代の URL を新ページへ 301 リダイレクト
+# 3) 存在しない URL はトップへ飛ばさず 404 ページを返す（Google に「消えた」と正しく伝えるため）
+
+Options -Indexes
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# --- 1) ホスト名・プロトコルの正規化 ---
+RewriteCond %{HTTP_HOST} ^coalabart\.com$ [NC]
+RewriteRule ^(.*)$ https://www.coalabart.com/$1 [R=301,L]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^(.*)$ https://www.coalabart.com/$1 [R=301,L]
+
+# --- 2) 旧 Wix URL → 新ページ（末尾スラッシュ・大文字小文字あり/なし両対応） ---
+RewriteRule ^(about|about-1|about-us|aboutus|profile|company|concept)/?$            /about.html    [R=301,L,NC]
+RewriteRule ^(service|services|service-1|services-1|projects|works)/?$             /services.html [R=301,L,NC]
+RewriteRule ^(contact|contact-1|contact-us|contactus|inquiry)/?$                   /contact.html  [R=301,L,NC]
+RewriteRule ^(journal|blog|news|column|post|post/.*|blog/.*)/?$                    /journal.html  [R=301,L,NC]
+RewriteRule ^(calendar|calender|fair|fairs|art-fair|artfair|schedule|events?)/?$   /calendar.html [R=301,L,NC]
+RewriteRule ^(home|index|top|blank|blank-1|ja|jp|en|english)/?$                    /              [R=301,L,NC]
+</IfModule>
+
+# --- キャッシュ制御：HTML は毎回確認、画像・CSS・JS は長めに ---
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|webp|svg|ico|css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
