@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260818f">
+<link rel="stylesheet" href="styles.css?v=20260820a">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">CoaLab<span class="logo-sub">ART ADVISORY</span></span>
+      <img class="logo-img logo-img-dark" src="images/logo-dark.png" alt="CoaLab ART ADVISORY" width="1529" height="747"><img class="logo-img logo-img-white" src="images/logo-white.png" alt="" aria-hidden="true" width="1529" height="747">
     </a>
 
     <nav class="nav" id="primaryNav">
@@ -58,7 +58,7 @@
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1 class="hero-title">
-      <span class="lang-ja">アートと、<br>共にある暮らしへ。</span>
+      <span class="lang-ja">アートと<br>共にある暮らしへ</span>
       <span class="lang-en">A Life,<br>Lived Alongside Art.</span>
     </h1>
     <p class="hero-sub">
@@ -70,6 +70,8 @@
       <span class="lang-en">READ MORE</span>
     </a>
   </div>
+  <button type="button" class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous image"><span></span></button>
+  <button type="button" class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next image"><span></span></button>
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
@@ -77,7 +79,7 @@
 <section class="section statement" id="statement">
   <div class="container narrow">
     <h2 class="section-title">
-      <span class="lang-ja"><span class="pw">アートがもたらす、</span><span class="pw">豊かな時間</span></span>
+      <span class="lang-ja"><span class="pw">アートがもたらす</span><span class="pw">豊かな時間</span></span>
       <span class="lang-en">Time, Enriched by Art</span>
     </h2>
     <div class="statement-body">
@@ -119,7 +121,7 @@
       </p>
     </div>
 
-    <!-- クライアント指定アルバム【HP】世界のアートシーンから の9枚（3×3で隙間なく組む） -->
+    <!-- クライアント指定アルバム【HP】世界のアートシーンから の6枚（PC 3×2 / スマホ 2×3） -->
     <div class="gallery-grid">
       <figure class="gallery-item"><img src="images/record-01.jpg" alt="" loading="lazy"></figure>
       <figure class="gallery-item"><img src="images/record-02.jpg" alt="" loading="lazy"></figure>
@@ -127,9 +129,6 @@
       <figure class="gallery-item"><img src="images/record-04.jpg" alt="" loading="lazy"></figure>
       <figure class="gallery-item"><img src="images/record-05.jpg" alt="" loading="lazy"></figure>
       <figure class="gallery-item"><img src="images/record-06.jpg" alt="" loading="lazy"></figure>
-      <figure class="gallery-item"><img src="images/record-07.jpg" alt="" loading="lazy"></figure>
-      <figure class="gallery-item"><img src="images/record-08.jpg" alt="" loading="lazy"></figure>
-      <figure class="gallery-item"><img src="images/record-09.jpg" alt="" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -143,7 +142,7 @@
   <div class="container narrow">
     <div class="section-heading center">
       <h2 class="section-title">
-        <span class="lang-ja"><span class="pw">日々の出逢いを、</span><span class="pw">Instagramで</span></span>
+        <span class="lang-ja"><span class="pw">日々の出逢いを</span><span class="pw">Instagramで</span></span>
         <span class="lang-en">Daily encounters, on Instagram</span>
       </h2>
     </div>
@@ -182,7 +181,7 @@
       <div class="footer-brand">
         <p class="footer-logo">COALAB — ART ADVISORY</p>
         <p class="footer-tagline">
-          <span class="lang-ja">アートと、共にある暮らしへ。</span>
+          <span class="lang-ja">アートと共にある暮らしへ</span>
           <span class="lang-en">A life, lived alongside art.</span>
         </p>
       </div>
@@ -193,7 +192,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=20260818f"></script>
+<script src="script.js?v=20260820a"></script>
 
 <!-- Instagram連携 (Behold JSONフィード): 最新投稿でタイルを差し替え。
      取得失敗・0件（例: コラボ投稿はAPI対象外）の間は上の静的タイルを表示 -->

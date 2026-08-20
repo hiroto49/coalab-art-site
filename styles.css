@@ -168,6 +168,12 @@ body {
   letter-spacing: 0.42em;
   text-indent: 0.42em;
 }
+/* 画像ロゴ（クライアント支給）。ヒーロー上では白、スクロール後・下層ページでは黒を表示 */
+.logo-img { display: block; height: 62px; width: auto; }
+@media (max-width: 960px) { .logo-img { height: 50px; } }
+.logo-img-white { display: none; }
+.site-header:not(.is-scrolled) .logo-img-dark { display: none; }
+.site-header:not(.is-scrolled) .logo-img-white { display: block; }
 .logo-text {
   font-family: var(--sans-en);
   font-size: 11px;
@@ -344,6 +350,34 @@ body {
   transition: background 0.3s var(--ease), width 0.3s var(--ease);
 }
 .hero-dots button.is-active { background: var(--color-surface); width: 48px; }
+/* 手動送り用の矢印（自動再生は廃止） */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 56px;
+  height: 56px;
+  margin-top: -28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-on-dark);
+  opacity: 0.7;
+  transition: opacity 0.3s var(--ease);
+}
+.hero-arrow:hover { opacity: 1; }
+.hero-arrow-prev { left: 18px; }
+.hero-arrow-next { right: 18px; }
+.hero-arrow span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.hero-arrow-prev span { transform: rotate(-135deg); }
+@media (max-width: 640px) { .hero-arrow { display: none; } } /* スマホはスワイプ操作 */
 
 /* ===== Statement ===== */
 .statement { background: var(--color-bg); text-align: center; padding: 140px 0; }
@@ -713,12 +747,15 @@ body {
   .logo-text { display: none; }
 }
 
+@media (max-width: 960px) {
+  /* クライアント要望: スマホでも PC 同様に本文を中央揃え */
+  .statement-body p { text-align: center; }
+  .service-card .service-body { text-align: center; }
+  .service-card .service-icon { margin-left: auto; margin-right: auto; }
+}
 @media (max-width: 540px) {
-  /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に。
-     9枚は2で割り切れないので、先頭の1枚を横いっぱいに使って下端を揃える */
+  /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に（6枚 → 2×3） */
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .gallery-item:first-child { grid-column: span 2; }
-  .gallery-item:first-child img { aspect-ratio: 4 / 3; }
   .profile-meta > div { grid-template-columns: 1fr; gap: 4px; }
   /* 「共にある暮らしへ。」が2行に割れないサイズに */
   .hero-title { font-size: 32px; }
@@ -780,7 +817,7 @@ body {
 .works { background: var(--color-bg-alt); }
 .works-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
 }
 .works-item {
@@ -796,7 +833,7 @@ body {
 }
 .works-item:hover img { transform: scale(1.05); }
 @media (max-width: 960px) {
-  .works-grid { grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .works-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 }
 @media (max-width: 640px) {
   .works-grid { grid-template-columns: repeat(2, 1fr); }
@@ -817,6 +854,9 @@ body {
   background-position: center;
   padding: 160px 0 64px;
 }
+.page-hero.hero-pos-services { background-position: center 18%; }   /* 人物の頭が切れないように */
+.page-hero.hero-pos-contact  { background-position: center 42%; min-height: 560px; } /* 縦写真: 作品全体が入る高さに */
+@media (max-width: 960px) { .page-hero.hero-pos-contact { min-height: 420px; background-position: center 40%; } }
 .page-hero-overlay {
   position: absolute;
   inset: 0;
