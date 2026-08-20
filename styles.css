@@ -49,6 +49,11 @@ h1, h2, h3, .section-title, .hero-title, .page-hero-title, .profile-name {
 p, dd, .section-lead, .lead {
   text-wrap: pretty;
 }
+/* Safari の text-wrap: pretty は段落全体を組み直すため、行幅の狭いスマホでは
+   各行が短く切られて右端が不揃いになる。スマホでは通常の折り返しに戻す */
+@media (max-width: 640px) {
+  p, dd, .section-lead, .lead { text-wrap: wrap; }
+}
 /* 文節単位の折り返し固定: .pwで囲んだ語句の途中では改行しない
    （Safariはword-break: auto-phrase非対応のため、重要な見出しは明示指定） */
 .pw { display: inline-block; }
