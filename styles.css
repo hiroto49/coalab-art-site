@@ -52,6 +52,9 @@ p, dd, .section-lead, .lead {
 /* 文節単位の折り返し固定: .pwで囲んだ語句の途中では改行しない
    （Safariはword-break: auto-phrase非対応のため、重要な見出しは明示指定） */
 .pw { display: inline-block; }
+/* スマホのみ有効な改行（クライアント指定の改行位置） */
+.br-sp { display: none; }
+@media (max-width: 640px) { .br-sp { display: inline; } }
 body {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -750,6 +753,14 @@ body {
 @media (max-width: 960px) {
   /* クライアント要望: スマホでも PC 同様に本文を中央揃え */
   .statement-body p { text-align: center; }
+  .statement-body .pw { white-space: nowrap; }
+}
+@media (max-width: 640px) {
+  /* 「住空間を埋める単なる装飾物ではありません。」を1行に収めるため少し小さく */
+  .statement-body p { font-size: 15.5px; }
+}
+@media (max-width: 359px) {
+  .statement-body .pw { white-space: normal; } /* 極小画面では折り返しを許可 */
   .service-card .service-body { text-align: center; }
   .service-card .service-icon { margin-left: auto; margin-right: auto; }
 }
