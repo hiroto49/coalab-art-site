@@ -190,9 +190,12 @@
     return lines.get(lastKey).replace(/[、。・．，「」『』（）()！？!?.,—–-]/g, '').length;
   };
   const fixOrphans = () => {
+    // スマホでは段落ごとに右余白が変わると行末が揃わず不揃いに見えるため、処理しない
+    const narrow = window.innerWidth <= 640;
     document.querySelectorAll(ORPHAN_SELECTOR).forEach((el) => {
       el.style.paddingRight = '';
       el.style.paddingLeft = '';
+      if (narrow) return;
       const count = lastLineCount(el);
       if (count === null || count > 2) return;
       const centered = getComputedStyle(el).textAlign === 'center';
