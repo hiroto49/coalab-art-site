@@ -289,8 +289,8 @@ body {
   /* 文字が乗る左側だけ濃くし、写真の主役が写る右側は素のまま見せる
      （ぼかしをかけずにコピーの可読性を確保するため） */
   background:
-    linear-gradient(90deg, rgba(var(--overlay-rgb),0.72) 0%, rgba(var(--overlay-rgb),0.42) 48%, rgba(var(--overlay-rgb),0.06) 100%),
-    linear-gradient(180deg, rgba(var(--overlay-rgb),0.26) 0%, rgba(var(--overlay-rgb),0.16) 40%, rgba(var(--overlay-rgb),0.44) 100%);
+    linear-gradient(90deg, rgba(var(--overlay-rgb),0.62) 0%, rgba(var(--overlay-rgb),0.32) 48%, rgba(var(--overlay-rgb),0.04) 100%),
+    linear-gradient(180deg, rgba(var(--overlay-rgb),0.20) 0%, rgba(var(--overlay-rgb),0.10) 40%, rgba(var(--overlay-rgb),0.34) 100%);
 }
 .hero-content {
   position: relative;
