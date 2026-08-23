@@ -862,7 +862,11 @@ body {
   background-position: center;
   padding: 160px 0 64px;
 }
-.page-hero.hero-pos-services { background-position: center 18%; }   /* 人物の頭が切れないように */
+.page-hero.hero-pos-services { background-position: center 18%; }
+/* Journal: PC では右端の人物が主張しすぎるため、右端をカットした別画像を使う（スマホは元画像） */
+@media (min-width: 641px) {
+  .page-hero.hero-journal { background-image: url('images/hero-journal-pc.jpg?v=0823') !important; background-position: center 42%; }
+}   /* 人物の頭が切れないように */
 .page-hero.hero-pos-contact  { background-position: center 42%; min-height: 560px; } /* 縦写真: 作品全体が入る高さに */
 @media (max-width: 960px) { .page-hero.hero-pos-contact { min-height: 420px; background-position: center 40%; } }
 .page-hero-overlay {
