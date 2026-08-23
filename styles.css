@@ -867,7 +867,7 @@ body {
 .page-hero.hero-pos-services { background-position: center 18%; }
 /* Journal: PC では右端の人物が主張しすぎるため、右端をカットした別画像を使う（スマホは元画像） */
 @media (min-width: 641px) {
-  .page-hero.hero-journal { background-image: url('images/hero-journal-pc.jpg?v=0823') !important; background-position: center 42%; }
+  .page-hero.hero-journal { background-image: url('images/hero-journal-pc.jpg?v=0823') !important; background-position: center 30%; }
 }   /* 人物の頭が切れないように */
 .page-hero.hero-pos-contact  { background-position: center 40%; } /* 縦写真: 帯の高さは他ページと統一し、作品が中心に来る位置に */
 .page-hero-overlay {
