@@ -59,6 +59,8 @@ p, dd, .section-lead, .lead {
 .pw { display: inline-block; }
 /* スマホのみ有効な改行（クライアント指定の改行位置） */
 .br-sp { display: none; }
+/* PCのみ有効な改行 */
+@media (max-width: 640px) { .br-pc { display: none; } }
 @media (max-width: 640px) { .br-sp { display: inline; } }
 body {
   background: var(--color-bg);
