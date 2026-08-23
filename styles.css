@@ -869,8 +869,7 @@ body {
 @media (min-width: 641px) {
   .page-hero.hero-journal { background-image: url('images/hero-journal-pc.jpg?v=0823') !important; background-position: center 42%; }
 }   /* 人物の頭が切れないように */
-.page-hero.hero-pos-contact  { background-position: center 42%; min-height: 560px; } /* 縦写真: 作品全体が入る高さに */
-@media (max-width: 960px) { .page-hero.hero-pos-contact { min-height: 420px; background-position: center 40%; } }
+.page-hero.hero-pos-contact  { background-position: center 38%; } /* 縦写真: 帯の高さは他ページと統一し、作品が中心に来る位置に */
 .page-hero-overlay {
   position: absolute;
   inset: 0;
