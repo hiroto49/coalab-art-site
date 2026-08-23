@@ -857,7 +857,7 @@ body {
 /* ===== Subpages: page hero ===== */
 .page-hero {
   position: relative;
-  min-height: 340px;
+  min-height: 400px;
   display: flex;
   align-items: flex-end;
   background-size: cover;
@@ -869,7 +869,7 @@ body {
 @media (min-width: 641px) {
   .page-hero.hero-journal { background-image: url('images/hero-journal-pc.jpg?v=0823') !important; background-position: center 42%; }
 }   /* 人物の頭が切れないように */
-.page-hero.hero-pos-contact  { background-position: center 38%; } /* 縦写真: 帯の高さは他ページと統一し、作品が中心に来る位置に */
+.page-hero.hero-pos-contact  { background-position: center 40%; } /* 縦写真: 帯の高さは他ページと統一し、作品が中心に来る位置に */
 .page-hero-overlay {
   position: absolute;
   inset: 0;
