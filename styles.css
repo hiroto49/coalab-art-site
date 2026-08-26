@@ -763,8 +763,16 @@ body {
 @media (max-width: 960px) {
   /* クライアント要望: スマホでも PC 同様に本文を中央揃え */
   .statement-body p { text-align: center; }
+  /* サービスカード: 見出し・番号・アイコンは中央、本文は左揃え（0826指示） */
   .service-card .service-body { text-align: center; }
   .service-card .service-icon { margin-left: auto; margin-right: auto; }
+  .service-card .service-body p { text-align: left; }
+  .service-card .service-body p.service-num { text-align: center; }
+  /* About Concept: 見出しは中央、本文は左のまま。4項目もタイトルのみ中央 */
+  .concept-text .section-title { text-align: center; }
+  .concept-list h3 { text-align: center; }
+  /* Services のリード文は左揃え */
+  .services .section-heading .section-lead { text-align: left; }
 }
 @media (max-width: 540px) {
   /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に（6枚 → 2×3） */
