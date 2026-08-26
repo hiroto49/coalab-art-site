@@ -895,7 +895,7 @@ body {
   position: absolute;
   inset: 0;
   /* 全面を暗くせず、タイトルが乗る下端だけ暗くする（可読性は文字影で担保） */
-  background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0.38) 0%, rgba(var(--overlay-rgb),0) 26%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
+  background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0.10) 0%, rgba(var(--overlay-rgb),0) 26%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
 }
 .page-hero-inner {
   /* 画像が画面より高い場合でも、タイトルが最初の画面内に見えるように
