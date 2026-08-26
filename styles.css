@@ -886,6 +886,8 @@ body {
   background-position: center;
   padding: 160px 0 64px;
 }
+/* Contact: 高さ上限(85svh)で上下が切れる際、作品「What me worry?」が帯の中央に来る位置 */
+.page-hero.hero-pos-contact { background-position: center 12%; }
 .page-hero-overlay {
   position: absolute;
   inset: 0;
