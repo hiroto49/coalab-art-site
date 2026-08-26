@@ -873,7 +873,10 @@ body {
   background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0.45), rgba(var(--overlay-rgb),0.55));
 }
 .page-hero-inner {
-  position: relative;
+  /* 画像が画面より高い場合でも、タイトルが最初の画面内に見えるように
+     viewport 下端に張り付かせる（スクロールすると画像下端の定位置に収まる） */
+  position: sticky;
+  bottom: 56px;
   z-index: 1;
   width: 100%;
   color: var(--color-on-dark);
