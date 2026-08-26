@@ -859,7 +859,10 @@ body {
   position: relative;
   /* クライアント要望(0826): 写真は切り取らず、元の縦横比のまま全体を表示する。
      画像ごとの比率は各ページの --hero-ar (幅/高さ) で指定 */
-  aspect-ratio: var(--hero-ar, 4 / 3);
+  /* 写真の比率どおりの高さで表示しつつ、最初の画面に次のセクションの頭が
+     覗くよう 85svh を上限とする（上限に当たった分だけ上下が切れる） */
+  width: 100%;
+  height: min(calc(100vw / var(--hero-ar, 1.333)), 85svh);
   min-height: 340px;
   display: flex;
   align-items: flex-end;
