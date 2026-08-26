@@ -343,6 +343,8 @@ body {
   max-width: 560px;
   color: #ffffff;
   opacity: 1;
+  /* 400と500の中間の太さに見せる（0.3pxの縁取りでわずかに太らせる） */
+  -webkit-text-stroke: 0.3px #ffffff;
   margin-bottom: 48px;
 }
 .hero-cta {
