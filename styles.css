@@ -857,19 +857,16 @@ body {
 /* ===== Subpages: page hero ===== */
 .page-hero {
   position: relative;
-  min-height: 400px;
+  /* クライアント要望(0826): 写真は切り取らず、元の縦横比のまま全体を表示する。
+     画像ごとの比率は各ページの --hero-ar (幅/高さ) で指定 */
+  aspect-ratio: var(--hero-ar, 4 / 3);
+  min-height: 340px;
   display: flex;
   align-items: flex-end;
   background-size: cover;
   background-position: center;
   padding: 160px 0 64px;
 }
-.page-hero.hero-pos-services { background-position: center 18%; }
-/* Journal: PC では右端の人物が主張しすぎるため、右端をカットした別画像を使う（スマホは元画像） */
-@media (min-width: 641px) {
-  .page-hero.hero-journal { background-image: url('images/hero-journal-pc.jpg?v=0823') !important; background-position: center 30%; }
-}   /* 人物の頭が切れないように */
-.page-hero.hero-pos-contact  { background-position: center 40%; } /* 縦写真: 帯の高さは他ページと統一し、作品が中心に来る位置に */
 .page-hero-overlay {
   position: absolute;
   inset: 0;
