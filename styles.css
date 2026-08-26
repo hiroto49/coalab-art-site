@@ -336,10 +336,12 @@ body {
 }
 [data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 300; letter-spacing: 0.01em; }
 .hero-sub {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 2;
-  max-width: 540px;
-  opacity: 0.92;
+  max-width: 560px;
+  color: #ffffff;
+  opacity: 1;
   margin-bottom: 48px;
 }
 .hero-cta {
