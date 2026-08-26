@@ -788,6 +788,7 @@ body {
   /* PC用の改行指定は狭い画面だと「改行＋折り返し」で行が細切れになるため無効化し、
      行を埋めながら折り返させる（語の途中で切れないよう .pw で語句を保護している） */
   .section-lead:not(.lead-fixed) br { display: none; }
+  .section-lead br.br-keep { display: inline; } /* 文の区切りはスマホでも改行を維持 */
 
   /* .lead-fixed は改行位置を指定どおり保つ箇所。一番長い行が折り返さないよう、
      その行の文字数（--lead-units）から必要な文字サイズを逆算する。
