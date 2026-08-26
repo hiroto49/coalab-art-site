@@ -140,13 +140,8 @@ body {
   transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
   border-bottom: 1px solid transparent;
 }
-/* 下層ページ: ヘッダーは画像に重ねず、白い帯として上に固定（スクロール追従） */
-body.page-sub .site-header { position: sticky; }
-/* HOME: 白バーの分だけスライダーの高さを引き、1画面に収める */
-body.page-sub .hero { height: calc(100svh - 103px); }
-@media (max-width: 960px) { body.page-sub .hero { height: calc(100svh - 83px); } }
 .site-header.is-scrolled {
-  background: rgba(var(--bg-rgb), 0.94);
+  background: rgba(var(--bg-rgb), 0.55); /* 薄い白 + ぼかしのすりガラス。画像が透けて見える */
   border-bottom-color: var(--color-line-soft);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -886,7 +881,7 @@ body.page-sub .hero { height: calc(100svh - 103px); }
   /* 写真の比率どおりの高さで表示しつつ、最初の画面に次のセクションの頭が
      覗くよう 85svh を上限とする（上限に当たった分だけ上下が切れる） */
   width: 100%;
-  height: min(calc(100vw / var(--hero-ar, 1.333)), 85svh);
+  height: min(calc(100vw / var(--hero-ar, 1.333)), 76svh);
   min-height: 340px;
   display: flex;
   align-items: flex-end;
