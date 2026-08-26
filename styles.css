@@ -141,10 +141,10 @@ body {
   border-bottom: 1px solid transparent;
 }
 .site-header.is-scrolled {
-  background: rgba(var(--bg-rgb), 0.26); /* ごく薄い白。画像がはっきり透けて見える */
+  background: rgba(var(--bg-rgb), 0.16); /* ほぼ素通し。うっすら白がかかる程度 */
   border-bottom-color: var(--color-line-soft);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 .header-inner {
   max-width: 1400px;
@@ -202,7 +202,8 @@ body {
 }
 .nav a {
   font-family: var(--sans-en);
-  font-size: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-ink);
@@ -231,7 +232,8 @@ body {
 }
 .lang-toggle {
   font-family: var(--sans-en);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.2em;
   border: 1px solid currentColor;
   padding: 6px 12px;
