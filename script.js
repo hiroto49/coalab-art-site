@@ -190,16 +190,17 @@
     return lines.get(lastKey).replace(/[、。・．，「」『』（）()！？!?.,—–-]/g, '').length;
   };
   const fixOrphans = () => {
-    // スマホでは段落ごとに右余白が変わると行末が揃わず不揃いに見えるため、処理しない
+    // スマホでは大きな右余白は行末の不揃いとして目立つため、
+    // 1〜2文字の孤立行を解消できる最小限（20pxまで）に抑える
     const narrow = window.innerWidth <= 640;
+    const maxPad = narrow ? 20 : 28;
     document.querySelectorAll(ORPHAN_SELECTOR).forEach((el) => {
       el.style.paddingRight = '';
       el.style.paddingLeft = '';
-      if (narrow) return;
       const count = lastLineCount(el);
       if (count === null || count > 2) return;
       const centered = getComputedStyle(el).textAlign === 'center';
-      for (let pad = 4; pad <= 28; pad += 4) {
+      for (let pad = 4; pad <= maxPad; pad += 4) {
         if (centered) {
           el.style.paddingLeft = (pad / 2) + 'px';
           el.style.paddingRight = (pad / 2) + 'px';

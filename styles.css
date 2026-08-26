@@ -761,8 +761,7 @@ body {
 }
 
 @media (max-width: 960px) {
-  /* クライアント要望: スマホでも PC 同様に本文を中央揃え */
-  .statement-body p { text-align: center; }
+  /* 0826: スマホの本文は左揃えで統一（中央揃えは見出しのみ） */
   /* サービスカード: 見出し・番号・アイコンは中央、本文は左揃え（0826指示） */
   .service-card .service-body { text-align: center; }
   .service-card .service-icon { margin-left: auto; margin-right: auto; }
