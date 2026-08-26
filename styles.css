@@ -293,9 +293,11 @@ body {
   inset: 0;
   /* 文字が乗る左側だけ濃くし、写真の主役が写る右側は素のまま見せる
      （ぼかしをかけずにコピーの可読性を確保するため） */
+  /* 全面を暗くせず、コピーが乗る左側と下端(ドット)だけを暗くする。
+     可読性の主役は文字側の text-shadow に移した */
   background:
-    linear-gradient(90deg, rgba(var(--overlay-rgb),0.62) 0%, rgba(var(--overlay-rgb),0.32) 48%, rgba(var(--overlay-rgb),0.04) 100%),
-    linear-gradient(180deg, rgba(var(--overlay-rgb),0.20) 0%, rgba(var(--overlay-rgb),0.10) 40%, rgba(var(--overlay-rgb),0.34) 100%);
+    linear-gradient(90deg, rgba(var(--overlay-rgb),0.48) 0%, rgba(var(--overlay-rgb),0.20) 42%, rgba(var(--overlay-rgb),0) 72%),
+    linear-gradient(180deg, rgba(var(--overlay-rgb),0.12) 0%, rgba(var(--overlay-rgb),0) 30%, rgba(var(--overlay-rgb),0) 72%, rgba(var(--overlay-rgb),0.28) 100%);
 }
 .hero-content {
   position: relative;
@@ -308,7 +310,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  text-shadow: 0 1px 14px rgba(0,0,0,0.42); /* 明るい写真の上でもコピーが沈まないように */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5); /* 明るい写真の上でもコピーが沈まないように（フィルターを薄くした分こちらで担保） */
 }
 .hero-eyebrow {
   font-family: var(--sans-en);
