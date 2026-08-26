@@ -97,6 +97,9 @@ body {
   padding: 120px 0;
   border-top: 1px solid var(--color-line-soft);
 }
+/* トップ画像直後のセクションは上余白を詰める（画像→本文のつながりを近く） */
+.page-hero + .section { padding-top: 64px; }
+@media (max-width: 960px) { .page-hero + .section { padding-top: 48px; } }
 .section:first-of-type { border-top: 0; }
 
 .section-label {
