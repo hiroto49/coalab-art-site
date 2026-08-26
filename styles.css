@@ -141,10 +141,10 @@ body {
   border-bottom: 1px solid transparent;
 }
 .site-header.is-scrolled {
-  background: rgba(var(--bg-rgb), 0.55); /* 薄い白 + ぼかしのすりガラス。画像が透けて見える */
+  background: rgba(var(--bg-rgb), 0.26); /* ごく薄い白。画像がはっきり透けて見える */
   border-bottom-color: var(--color-line-soft);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 .header-inner {
   max-width: 1400px;
