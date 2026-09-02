@@ -346,8 +346,10 @@ body {
   max-width: 560px;
   color: #ffffff;
   opacity: 1;
-  /* 400と500の中間の太さに見せる（0.3pxの縁取りでわずかに太らせる） */
-  -webkit-text-stroke: 0.5px #ffffff;
+  /* 0902: 明るい写真でもメインコピーと同じ見え方に。太さ500 + 縁取り + 黒のハローを重ねる */
+  font-weight: 500;
+  -webkit-text-stroke: 0.4px #ffffff;
+  text-shadow: 0 0 1px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.60), 0 0 12px rgba(0,0,0,0.50), 0 3px 24px rgba(0,0,0,0.50);
   margin-bottom: 48px;
 }
 .hero-cta {
