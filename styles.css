@@ -352,6 +352,14 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5);
   margin-bottom: 48px;
 }
+/* 0903: PC幅だけサブコピーを読みやすく（太さ500 + 黒のハロー）。スマホは上の元の見え方のまま */
+@media (min-width: 961px) {
+  .hero-sub {
+    font-weight: 500;
+    -webkit-text-stroke: 0.4px #ffffff;
+    text-shadow: 0 0 1px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.60), 0 0 12px rgba(0,0,0,0.50), 0 3px 24px rgba(0,0,0,0.50);
+  }
+}
 .hero-cta {
   font-family: var(--sans-en);
   font-size: 11px;
