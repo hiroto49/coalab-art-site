@@ -315,7 +315,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.38), 0 2px 14px rgba(0,0,0,0.30); /* 白文字にごく薄いドロップシャドウのみ（0902指示） */
+  /* 写真は暗くせず、文字側の柔らかい黒のハローだけで可読性を確保（ラフの見え方に合わせる） */
+  text-shadow: 0 0 1px rgba(0,0,0,0.40), 0 1px 3px rgba(0,0,0,0.50), 0 0 14px rgba(0,0,0,0.55), 0 0 14px rgba(0,0,0,0.45), 0 4px 30px rgba(0,0,0,0.50);
 }
 .hero-eyebrow {
   font-family: var(--sans-en);
@@ -329,7 +330,7 @@ body {
 [data-lang="ja"] .hero-eyebrow { font-family: var(--sans-jp); letter-spacing: 0.2em; font-size: 12px; }
 .hero-title {
   font-family: var(--serif-jp);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(36px, 6vw, 76px);
   line-height: 1.25;
   letter-spacing: 0.05em;
@@ -338,7 +339,7 @@ body {
 }
 /* 0902: 日本語表示でもメインコピーは英文「A Life with Art」になったため、両言語とも欧文セリフで表示 */
 [data-lang="ja"] .hero-title,
-[data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 300; letter-spacing: 0.01em; }
+[data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 500; letter-spacing: 0.01em; }
 .hero-sub {
   font-size: 18px;
   line-height: 2;
@@ -346,7 +347,7 @@ body {
   color: #ffffff;
   opacity: 1;
   /* 400と500の中間の太さに見せる（0.3pxの縁取りでわずかに太らせる） */
-  -webkit-text-stroke: 0.3px #ffffff;
+  -webkit-text-stroke: 0.5px #ffffff;
   margin-bottom: 48px;
 }
 .hero-cta {
@@ -355,6 +356,7 @@ body {
   letter-spacing: 0.32em;
   border: 1px solid var(--color-on-dark);
   padding: 16px 32px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.45), inset 0 0 14px rgba(0,0,0,0.45); /* 枠線も白い写真に沈まないように */
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
 .hero-cta:hover { background: var(--color-surface); color: var(--color-ink); }
