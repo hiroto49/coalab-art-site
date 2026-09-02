@@ -136,15 +136,15 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(var(--bg-rgb), 0);
+  /* 0902 クライアント指定: 写真は暗くせず、ナビの帯だけ黒10〜15%の透過レイヤーで
+     文字（白）の可読性を確保する。スクロール後は白背景・黒文字に切り替わる */
+  background: rgba(0, 0, 0, 0.12);
   transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
   border-bottom: 1px solid transparent;
 }
 .site-header.is-scrolled {
-  background: rgba(var(--bg-rgb), 0.16); /* ほぼ素通し。うっすら白がかかる程度 */
+  background: rgba(var(--bg-rgb), 0.97);
   border-bottom-color: var(--color-line-soft);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
 }
 .header-inner {
   max-width: 1400px;
@@ -186,10 +186,10 @@ body {
 @media (max-width: 960px) { .logo-img { height: 50px; } }
 .logo-img-white { display: none; }
 .site-header:not(.is-scrolled) .logo-img-dark { display: none; }
-.site-header:not(.is-scrolled) .logo-img-white { display: block; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.55)); }
-/* 明るい写真の上でもナビが読めるよう、ヒーロー上では文字に影を付ける */
+.site-header:not(.is-scrolled) .logo-img-white { display: block; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25)); }
+/* ヒーロー上のナビ文字はごく薄い影のみ（可読性はヘッダーの黒12%帯で確保） */
 .site-header:not(.is-scrolled) .nav a,
-.site-header:not(.is-scrolled) .lang-toggle { text-shadow: 0 1px 3px rgba(0,0,0,0.5), 0 1px 10px rgba(0,0,0,0.45); }
+.site-header:not(.is-scrolled) .lang-toggle { text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
 .logo-text {
   font-family: var(--sans-en);
   font-size: 11px;
@@ -300,9 +300,9 @@ body {
      （ぼかしをかけずにコピーの可読性を確保するため） */
   /* 全面を暗くせず、コピーが乗る左側と下端(ドット)だけを暗くする。
      可読性の主役は文字側の text-shadow に移した */
-  background:
-    linear-gradient(90deg, rgba(var(--overlay-rgb),0.48) 0%, rgba(var(--overlay-rgb),0.20) 42%, rgba(var(--overlay-rgb),0) 72%),
-    linear-gradient(180deg, rgba(var(--overlay-rgb),0.12) 0%, rgba(var(--overlay-rgb),0) 30%, rgba(var(--overlay-rgb),0) 72%, rgba(var(--overlay-rgb),0.28) 100%);
+  /* 0902 クライアント指定: 写真は100%の明るさのまま（暗くしない）。
+     可読性は文字のごく薄いドロップシャドウのみで担保する */
+  background: none;
 }
 .hero-content {
   position: relative;
@@ -315,7 +315,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5); /* 明るい写真の上でもコピーが沈まないように（フィルターを薄くした分こちらで担保） */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.38), 0 2px 14px rgba(0,0,0,0.30); /* 白文字にごく薄いドロップシャドウのみ（0902指示） */
 }
 .hero-eyebrow {
   font-family: var(--sans-en);
@@ -336,6 +336,8 @@ body {
   margin-bottom: 28px;
   max-width: 800px;
 }
+/* 0902: 日本語表示でもメインコピーは英文「A Life with Art」になったため、両言語とも欧文セリフで表示 */
+[data-lang="ja"] .hero-title,
 [data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 300; letter-spacing: 0.01em; }
 .hero-sub {
   font-size: 18px;
@@ -790,8 +792,6 @@ body {
   /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に（6枚 → 2×3） */
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .profile-meta > div { grid-template-columns: 1fr; gap: 4px; }
-  /* 「共にある暮らしへ。」が2行に割れないサイズに */
-  .hero-title { font-size: 32px; }
 
   /* 縦長すぎる画面では横長写真がほとんど切り落とされるため高さを抑える。
      svh はアドレスバーの伸縮で高さが跳ねないようにするため（非対応環境は上のvhを使う） */
@@ -900,7 +900,7 @@ body {
   position: absolute;
   inset: 0;
   /* 全面を暗くせず、タイトルが乗る下端だけ暗くする（可読性は文字影で担保） */
-  background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0.10) 0%, rgba(var(--overlay-rgb),0) 26%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
+  background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0) 0%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
 }
 .page-hero-inner {
   /* 画像が画面より高い場合でも、タイトルが最初の画面内に見えるように

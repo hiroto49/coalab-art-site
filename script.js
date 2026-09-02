@@ -80,9 +80,9 @@
 
   // ===== Header scroll state =====
   const header = document.getElementById('siteHeader');
-  // 下層ページ（page-hero を持つページ）は常に白バーのヘッダー。
-  // HOME だけスクロールで透明→白に切り替える
-  const alwaysSolid = document.body.classList.contains('page-sub');
+  // 0902 クライアント指定: 写真（ヒーロー）を持つ全ページで、最上部では透過帯＋白文字、
+  // スクロール後は白背景＋黒文字に切り替える。ヒーローの無いページ（404）は常に白バー
+  const alwaysSolid = !document.querySelector('.hero, .page-hero');
   const updateHeader = () => {
     if (!header) return;
     if (alwaysSolid || window.scrollY > 40) header.classList.add('is-scrolled');
