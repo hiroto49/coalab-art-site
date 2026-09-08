@@ -9,15 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260818f">
+<link rel="stylesheet" href="styles.css?v=20260827g">
 </head>
-<body>
+<body class="page-sub">
 
 <!-- ===== Header ===== -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
     <a href="index.html" class="logo">
-      <span class="logo-mark">CoaLab<span class="logo-sub">ART ADVISORY</span></span>
+      <img class="logo-img logo-img-dark" src="images/logo-dark.png" alt="CoaLab ART ADVISORY" width="1529" height="747"><img class="logo-img logo-img-white" src="images/logo-white.png" alt="" aria-hidden="true" width="1529" height="747">
     </a>
 
     <nav class="nav" id="primaryNav">
@@ -43,12 +43,12 @@
 </header>
 
 <!-- ===== Page Hero ===== -->
-<section class="page-hero" style="background-image:url('images/hero-about.jpg')">
+<section class="page-hero" style="--hero-ar:1.332; background-image:url('images/hero-about.jpg')">
   <div class="page-hero-overlay"></div>
   <div class="page-hero-inner container">
     <h1 class="page-hero-title">
-      <span class="lang-ja">About</span>
-      <span class="lang-en">About</span>
+      <span class="lang-ja">ABOUT</span>
+      <span class="lang-en">ABOUT</span>
     </h1>
   </div>
 </section>
@@ -68,7 +68,7 @@
 
         <div class="lead">
           <p>
-            <span class="lang-ja">アートアドバイザーというと、作品の売買や仲介を行う仕事だと思われるかもしれません。もちろん、それも私たちの大切な役割のひとつです。しかし、CoaLabが本当に大切にしているのは、その先に続く時間です。</span>
+            <span class="lang-ja">アートアドバイザーというと、作品の仲介や売買を行う仕事だと思われるかもしれません。もちろん、それも私たちの大切な役割のひとつです。しかし、CoaLabが本当に大切にしているのは、その先に続く時間です。</span>
             <span class="lang-en">An art advisor is often imagined as someone who simply buys, sells, or brokers artworks. That is indeed one of our important roles. But what CoaLab truly values is the time that follows.</span>
           </p>
           <p>
@@ -137,10 +137,6 @@
   <div class="container">
     <div class="profile-grid">
       <div class="profile-text">
-        <h2 class="section-title">
-          <span class="lang-ja">プロフィール</span>
-          <span class="lang-en">Profile</span>
-        </h2>
 
         <h3 class="profile-name">
           <span class="lang-ja">Haruka Ohno<small><span class="pw">CoaLab 代表</span> / <span class="pw">Art Fair Tokyo VIP Relations</span></small></span>
@@ -148,12 +144,16 @@
         </h3>
 
         <p>
-          <span class="lang-ja">外資系スポーツアパレル企業に就職、その後ブランディング会社に転職して外資系企業のプロモーション、イベント企画・運営に携わる。</span>
-          <span class="lang-en">Began her career at a global sportswear company, then moved to a branding agency, where she handled promotion and event planning and production for international clients.</span>
+          <span class="lang-ja">外資系スポーツアパレル企業を経て、ブランディング会社へ。外資系企業のブランディング、プロモーション、イベントの企画・運営に携わる。</span>
+          <span class="lang-en">After a global sportswear company, she moved to a branding agency, working on branding, promotion, and event planning and production for international clients.</span>
         </p>
         <p>
-          <span class="lang-ja">趣味であったアート収集が高じ、NYにてアートビジネスを学び、2023年CoaLab株式会社を設立。国内外のギャラリーやアートフェアとのネットワークを活かして、個人コレクターや企業を対象としたアートアドバイザリーを行う。作品の選定・取得から、コレクション形成、管理、売却及び次世代への継承まで、長期的な視点でサポートしている。</span>
-          <span class="lang-en">What began as a personal passion for collecting led her to study the art business in New York, and in 2023 she founded CoaLab Inc. Drawing on her network of galleries and art fairs in Japan and abroad, she advises private collectors and corporations — supporting everything from the selection and acquisition of works to collection building, management, sale, and succession to the next generation, always with a long-term view.</span>
+          <span class="lang-ja">自身でもアートを収集する中で関心を深め、ニューヨークでアートビジネスを学ぶ。2023年、CoaLab株式会社を設立。</span>
+          <span class="lang-en">Collecting art herself deepened her interest, leading her to study the art business in New York. In 2023 she founded CoaLab Inc.</span>
+        </p>
+        <p>
+          <span class="lang-ja">国内外のギャラリーやアートフェアとのネットワークを築き、個人コレクターや企業を対象にアートアドバイザリーを行う。作品の選定・取得から、コレクション形成、管理、売却及び次世代への継承まで、長期的な視点でサポートしている。</span>
+          <span class="lang-en">Building a network of galleries and art fairs in Japan and abroad, she advises private collectors and corporations — from the selection and acquisition of works to collection building, management, sale, and succession to the next generation, always with a long-term view.</span>
         </p>
         <p>
           <span class="lang-ja">現在はArt Fair TokyoのVIP Relationsも務め、コレクターとギャラリーをつなぐVIPプログラムに携わる。</span>
@@ -166,10 +166,11 @@
             <dd><span class="lang-ja">Gagosian / Hauser & Wirth / Mennour / Pace Gallery など海外メガギャラリー<br>Shugo Arts / Taka Ishii Gallery / TARO NASU / Tomio Koyama Gallery など国内主要ギャラリー<br>株式会社阪急阪神百貨店など大型商業施設、個人コレクター及び財団</span><span class="lang-en">Gagosian, Hauser & Wirth, Mennour, Pace Gallery and other leading international galleries<br>Shugo Arts, Taka Ishii Gallery, TARO NASU, Tomio Koyama Gallery and other major Japanese galleries<br>Large commercial facilities such as Hankyu Hanshin Department Stores, private collectors and foundations</span></dd>
           </div>
         </dl>
+
       </div>
 
       <div class="profile-image">
-        <img src="images/about-profile.jpg" alt="">
+        <img src="images/about-profile.jpg?v=20260827g" alt="">
       </div>
     </div>
   </div>
@@ -182,7 +183,7 @@
       <div class="footer-brand">
         <p class="footer-logo">COALAB — ART ADVISORY</p>
         <p class="footer-tagline">
-          <span class="lang-ja">アートと、共にある暮らしへ。</span>
+          <span class="lang-ja">アートと共にある暮らしへ</span>
           <span class="lang-en">A life, lived alongside art.</span>
         </p>
       </div>
@@ -193,6 +194,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=20260818f"></script>
+<script src="script.js?v=20260827g"></script>
 </body>
 </html>

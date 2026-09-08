@@ -49,9 +49,19 @@ h1, h2, h3, .section-title, .hero-title, .page-hero-title, .profile-name {
 p, dd, .section-lead, .lead {
   text-wrap: pretty;
 }
+/* Safari の text-wrap: pretty は段落全体を組み直すため、行幅の狭いスマホでは
+   各行が短く切られて右端が不揃いになる。スマホでは通常の折り返しに戻す */
+@media (max-width: 640px) {
+  p, dd, .section-lead, .lead { text-wrap: wrap; }
+}
 /* 文節単位の折り返し固定: .pwで囲んだ語句の途中では改行しない
    （Safariはword-break: auto-phrase非対応のため、重要な見出しは明示指定） */
 .pw { display: inline-block; }
+/* スマホのみ有効な改行（クライアント指定の改行位置） */
+.br-sp { display: none; }
+/* PCのみ有効な改行 */
+@media (max-width: 640px) { .br-pc { display: none; } }
+@media (max-width: 640px) { .br-sp { display: inline; } }
 body {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -87,6 +97,9 @@ body {
   padding: 120px 0;
   border-top: 1px solid var(--color-line-soft);
 }
+/* トップ画像直後のセクションは上余白を詰める（画像→本文のつながりを近く） */
+.page-hero + .section { padding-top: 64px; }
+@media (max-width: 960px) { .page-hero + .section { padding-top: 48px; } }
 .section:first-of-type { border-top: 0; }
 
 .section-label {
@@ -123,15 +136,15 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(var(--bg-rgb), 0);
+  /* 0902 クライアント指定: 写真は暗くせず、ナビの帯だけ黒10〜15%の透過レイヤーで
+     文字（白）の可読性を確保する。スクロール後は白背景・黒文字に切り替わる */
+  background: rgba(0, 0, 0, 0.12);
   transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
   border-bottom: 1px solid transparent;
 }
 .site-header.is-scrolled {
-  background: rgba(var(--bg-rgb), 0.94);
+  background: rgba(var(--bg-rgb), 0.97);
   border-bottom-color: var(--color-line-soft);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 .header-inner {
   max-width: 1400px;
@@ -168,6 +181,15 @@ body {
   letter-spacing: 0.42em;
   text-indent: 0.42em;
 }
+/* 画像ロゴ（クライアント支給）。ヒーロー上では白、スクロール後・下層ページでは黒を表示 */
+.logo-img { display: block; height: 62px; width: auto; }
+@media (max-width: 960px) { .logo-img { height: 50px; } }
+.logo-img-white { display: none; }
+.site-header:not(.is-scrolled) .logo-img-dark { display: none; }
+.site-header:not(.is-scrolled) .logo-img-white { display: block; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25)); }
+/* ヒーロー上のナビ文字はごく薄い影のみ（可読性はヘッダーの黒12%帯で確保） */
+.site-header:not(.is-scrolled) .nav a,
+.site-header:not(.is-scrolled) .lang-toggle { text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
 .logo-text {
   font-family: var(--sans-en);
   font-size: 11px;
@@ -180,7 +202,8 @@ body {
 }
 .nav a {
   font-family: var(--sans-en);
-  font-size: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-ink);
@@ -209,7 +232,8 @@ body {
 }
 .lang-toggle {
   font-family: var(--sans-en);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.2em;
   border: 1px solid currentColor;
   padding: 6px 12px;
@@ -274,9 +298,11 @@ body {
   inset: 0;
   /* 文字が乗る左側だけ濃くし、写真の主役が写る右側は素のまま見せる
      （ぼかしをかけずにコピーの可読性を確保するため） */
-  background:
-    linear-gradient(90deg, rgba(var(--overlay-rgb),0.72) 0%, rgba(var(--overlay-rgb),0.42) 48%, rgba(var(--overlay-rgb),0.06) 100%),
-    linear-gradient(180deg, rgba(var(--overlay-rgb),0.26) 0%, rgba(var(--overlay-rgb),0.16) 40%, rgba(var(--overlay-rgb),0.44) 100%);
+  /* 全面を暗くせず、コピーが乗る左側と下端(ドット)だけを暗くする。
+     可読性の主役は文字側の text-shadow に移した */
+  /* 0902 クライアント指定: 写真は100%の明るさのまま（暗くしない）。
+     可読性は文字のごく薄いドロップシャドウのみで担保する */
+  background: none;
 }
 .hero-content {
   position: relative;
@@ -289,7 +315,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  text-shadow: 0 1px 14px rgba(0,0,0,0.42); /* 明るい写真の上でもコピーが沈まないように */
+  /* 写真は暗くせず、文字側の柔らかい黒のハローだけで可読性を確保（ラフの見え方に合わせる） */
+  text-shadow: 0 0 1px rgba(0,0,0,0.40), 0 1px 3px rgba(0,0,0,0.50), 0 0 14px rgba(0,0,0,0.55), 0 0 14px rgba(0,0,0,0.45), 0 4px 30px rgba(0,0,0,0.50);
 }
 .hero-eyebrow {
   font-family: var(--sans-en);
@@ -303,20 +330,35 @@ body {
 [data-lang="ja"] .hero-eyebrow { font-family: var(--sans-jp); letter-spacing: 0.2em; font-size: 12px; }
 .hero-title {
   font-family: var(--serif-jp);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(36px, 6vw, 76px);
   line-height: 1.25;
   letter-spacing: 0.05em;
   margin-bottom: 28px;
   max-width: 800px;
 }
-[data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 300; letter-spacing: 0.01em; }
+/* 0902: 日本語表示でもメインコピーは英文「A Life with Art」になったため、両言語とも欧文セリフで表示 */
+[data-lang="ja"] .hero-title,
+[data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 500; letter-spacing: 0.01em; }
 .hero-sub {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 2;
-  max-width: 540px;
-  opacity: 0.92;
+  max-width: 560px;
+  color: #ffffff;
+  opacity: 1;
+  /* 400と500の中間の太さに見せる（0.3pxの縁取りでわずかに太らせる）
+     ※ 0903: サブコピーは依頼外だったため 0902 以前の見え方に戻した（影も当時と同じ値を明示） */
+  -webkit-text-stroke: 0.3px #ffffff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5);
   margin-bottom: 48px;
+}
+/* 0903: PC幅だけサブコピーを読みやすく（太さ500 + 黒のハロー）。スマホは上の元の見え方のまま */
+@media (min-width: 961px) {
+  .hero-sub {
+    font-weight: 500;
+    -webkit-text-stroke: 0.4px #ffffff;
+    text-shadow: 0 0 1px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.60), 0 0 12px rgba(0,0,0,0.50), 0 3px 24px rgba(0,0,0,0.50);
+  }
 }
 .hero-cta {
   font-family: var(--sans-en);
@@ -324,6 +366,7 @@ body {
   letter-spacing: 0.32em;
   border: 1px solid var(--color-on-dark);
   padding: 16px 32px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.45), inset 0 0 14px rgba(0,0,0,0.45); /* 枠線も白い写真に沈まないように */
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
 .hero-cta:hover { background: var(--color-surface); color: var(--color-ink); }
@@ -344,6 +387,34 @@ body {
   transition: background 0.3s var(--ease), width 0.3s var(--ease);
 }
 .hero-dots button.is-active { background: var(--color-surface); width: 48px; }
+/* 手動送り用の矢印（自動再生は廃止） */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 56px;
+  height: 56px;
+  margin-top: -28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-on-dark);
+  opacity: 0.7;
+  transition: opacity 0.3s var(--ease);
+}
+.hero-arrow:hover { opacity: 1; }
+.hero-arrow-prev { left: 18px; }
+.hero-arrow-next { right: 18px; }
+.hero-arrow span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.hero-arrow-prev span { transform: rotate(-135deg); }
+@media (max-width: 640px) { .hero-arrow { display: none; } } /* スマホはスワイプ操作 */
 
 /* ===== Statement ===== */
 .statement { background: var(--color-bg); text-align: center; padding: 140px 0; }
@@ -437,7 +508,7 @@ body {
 .service-icon {
   width: 46px;
   height: 46px;
-  margin-bottom: 22px;
+  margin: 0 auto 22px; /* PCもモバイル同様に中央 */
   color: var(--color-accent);
 }
 .service-icon svg { width: 100%; height: 100%; }
@@ -446,6 +517,7 @@ body {
   font-style: italic;
   font-size: 14px;
   color: var(--color-accent);
+  text-align: center; /* PCもモバイル同様に中央 */
   letter-spacing: 0.1em;
   margin-bottom: 16px;
 }
@@ -453,6 +525,7 @@ body {
   font-family: var(--serif-jp);
   font-weight: 500;
   font-size: 22px;
+  text-align: center; /* PCもモバイル同様に中央 */
   letter-spacing: 0.04em;
   margin-bottom: 20px;
   line-height: 1.4;
@@ -488,9 +561,9 @@ body {
 }
 .profile-text p {
   font-size: 15.5px;
-  line-height: 2.1;
+  line-height: 1.9;
   color: var(--color-ink);
-  margin-bottom: 40px;
+  margin-bottom: 18px;
 }
 .profile-meta {
   border-top: 1px solid var(--color-line);
@@ -713,15 +786,24 @@ body {
   .logo-text { display: none; }
 }
 
+@media (max-width: 960px) {
+  /* 0826: スマホの本文は左揃えで統一（中央揃えは見出しのみ） */
+  .section-lead, .contact-lead { text-align: left; }
+  /* サービスカード: 見出し・番号・アイコンは中央、本文は左揃え（0826指示） */
+  .service-card .service-body { text-align: center; }
+  .service-card .service-icon { margin-left: auto; margin-right: auto; }
+  .service-card .service-body p { text-align: left; }
+  .service-card .service-body p.service-num { text-align: center; }
+  /* About Concept: 見出しは中央、本文は左のまま。4項目もタイトルのみ中央 */
+  .concept-text .section-title { text-align: center; }
+  .concept-list h3 { text-align: center; }
+  /* Services のリード文は左揃え */
+  .services .section-heading .section-lead { text-align: left; }
+}
 @media (max-width: 540px) {
-  /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に。
-     9枚は2で割り切れないので、先頭の1枚を横いっぱいに使って下端を揃える */
+  /* 狭い画面では3列だとタイルが小さすぎて写真が見えないため2列に（6枚 → 2×3） */
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .gallery-item:first-child { grid-column: span 2; }
-  .gallery-item:first-child img { aspect-ratio: 4 / 3; }
   .profile-meta > div { grid-template-columns: 1fr; gap: 4px; }
-  /* 「共にある暮らしへ。」が2行に割れないサイズに */
-  .hero-title { font-size: 32px; }
 
   /* 縦長すぎる画面では横長写真がほとんど切り落とされるため高さを抑える。
      svh はアドレスバーの伸縮で高さが跳ねないようにするため（非対応環境は上のvhを使う） */
@@ -730,6 +812,7 @@ body {
   /* PC用の改行指定は狭い画面だと「改行＋折り返し」で行が細切れになるため無効化し、
      行を埋めながら折り返させる（語の途中で切れないよう .pw で語句を保護している） */
   .section-lead:not(.lead-fixed) br { display: none; }
+  .section-lead br.br-keep { display: inline; } /* 文の区切りはスマホでも改行を維持 */
 
   /* .lead-fixed は改行位置を指定どおり保つ箇所。一番長い行が折り返さないよう、
      その行の文字数（--lead-units）から必要な文字サイズを逆算する。
@@ -780,7 +863,7 @@ body {
 .works { background: var(--color-bg-alt); }
 .works-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
 }
 .works-item {
@@ -796,7 +879,7 @@ body {
 }
 .works-item:hover img { transform: scale(1.05); }
 @media (max-width: 960px) {
-  .works-grid { grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .works-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 }
 @media (max-width: 640px) {
   .works-grid { grid-template-columns: repeat(2, 1fr); }
@@ -810,6 +893,12 @@ body {
 /* ===== Subpages: page hero ===== */
 .page-hero {
   position: relative;
+  /* クライアント要望(0826): 写真は切り取らず、元の縦横比のまま全体を表示する。
+     画像ごとの比率は各ページの --hero-ar (幅/高さ) で指定 */
+  /* 写真の比率どおりの高さで表示しつつ、最初の画面に次のセクションの頭が
+     覗くよう 85svh を上限とする（上限に当たった分だけ上下が切れる） */
+  width: 100%;
+  height: min(calc(100vw / var(--hero-ar, 1.333)), 76svh);
   min-height: 340px;
   display: flex;
   align-items: flex-end;
@@ -817,13 +906,19 @@ body {
   background-position: center;
   padding: 160px 0 64px;
 }
+/* Contact: 高さ上限(85svh)で上下が切れる際、作品「What me worry?」が帯の中央に来る位置 */
+.page-hero.hero-pos-contact { background-position: center 30%; }
 .page-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0.45), rgba(var(--overlay-rgb),0.55));
+  /* 全面を暗くせず、タイトルが乗る下端だけ暗くする（可読性は文字影で担保） */
+  background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0) 0%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
 }
 .page-hero-inner {
-  position: relative;
+  /* 画像が画面より高い場合でも、タイトルが最初の画面内に見えるように
+     viewport 下端に張り付かせる（スクロールすると画像下端の定位置に収まる） */
+  position: sticky;
+  bottom: 56px;
   z-index: 1;
   width: 100%;
   color: var(--color-on-dark);
@@ -841,6 +936,7 @@ body {
   font-size: clamp(28px, 4vw, 44px);
   letter-spacing: 0.06em;
   line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5);
 }
 [data-lang="en"] .page-hero-title { font-family: var(--serif-en); font-weight: 500; }
 
