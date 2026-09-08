@@ -18,12 +18,12 @@ RewriteCond %{HTTP:X-Forwarded-Proto} !=https
 RewriteRule ^(.*)$ https://www.coalabart.com/$1 [R=301,L]
 
 # --- 2) 旧 Wix URL → 新ページ（末尾スラッシュ・大文字小文字あり/なし両対応） ---
-RewriteRule ^(about|about-1|about-us|aboutus|profile|company|concept)/?$            /about.html    [R=301,L,NC]
-RewriteRule ^(service|services|service-1|services-1|projects|works)/?$             /services.html [R=301,L,NC]
-RewriteRule ^(contact|contact-1|contact-us|contactus|inquiry)/?$                   /contact.html  [R=301,L,NC]
-RewriteRule ^(journal|blog|news|column|post|post/.*|blog/.*)/?$                    /journal.html  [R=301,L,NC]
-RewriteRule ^(calendar|calender|fair|fairs|art-fair|artfair|schedule|events?)/?$   /calendar.html [R=301,L,NC]
-RewriteRule ^(home|index|top|blank|blank-1|ja|jp|en|english)/?$                    /              [R=301,L,NC]
+RewriteRule ^(about|about-1|about-us|aboutus|profile|company|concept)/?$            https://www.coalabart.com/about.html    [R=301,L,NC]
+RewriteRule ^(service|services|service-1|services-1|projects|works)/?$             https://www.coalabart.com/services.html [R=301,L,NC]
+RewriteRule ^(contact|contact-1|contact-us|contactus|inquiry)/?$                   https://www.coalabart.com/contact.html  [R=301,L,NC]
+RewriteRule ^(journal|blog|news|column|post|post/.*|blog/.*)/?$                    https://www.coalabart.com/journal.html  [R=301,L,NC]
+RewriteRule ^(calendar|calender|fair|fairs|art-fair|artfair|schedule|events?)/?$   https://www.coalabart.com/calendar.html [R=301,L,NC]
+RewriteRule ^(home|index|top|blank|blank-1|ja|jp|en|english)/?$                    https://www.coalabart.com/              [R=301,L,NC]
 </IfModule>
 
 # --- キャッシュ制御：HTML は毎回確認、画像・CSS・JS は長めに ---
