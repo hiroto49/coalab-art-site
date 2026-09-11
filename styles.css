@@ -29,10 +29,10 @@ h1, h2, h3, h4, p { margin: 0; }
   --color-on-dark: #FFFFFF;
   --on-dark-rgb: 255, 255, 255;
 
-  --serif-jp: "Noto Serif JP", "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", serif;
-  --serif-en: "Cormorant Garamond", "Georgia", serif;
-  --sans-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
-  --sans-en: "Inter", "Helvetica Neue", Arial, sans-serif;
+  /* 書体は日本語1種・英語1種に統一する（0904 クライアント指摘。参考: LURF GALLERY = Noto Sans JP + Helvetica系）
+     読みにくい箇所は書体を足さず、太さで調整する */
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-en: "Inter", "Helvetica Neue", Arial, sans-serif;
   --ease: cubic-bezier(.4,.0,.2,1);
 }
 
@@ -65,7 +65,7 @@ p, dd, .section-lead, .lead {
 body {
   background: var(--color-bg);
   color: var(--color-ink);
-  font-family: var(--sans-jp);
+  font-family: var(--font-jp);
   font-weight: 300;
   font-size: 16px;
   line-height: 1.8;
@@ -79,8 +79,10 @@ body {
 [data-lang="en"] .lang-ja { display: none; }
 [data-lang="en"] .lang-en { display: inline; }
 [data-lang="en"] body, [data-lang="en"] {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
 }
+/* 日本語表示の中にある英語だけの語句（見出しの Concept など） */
+[lang="en"] { font-family: var(--font-en); }
 
 /* ===== Layout helpers ===== */
 .container {
@@ -103,7 +105,7 @@ body {
 .section:first-of-type { border-top: 0; }
 
 .section-label {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.32em;
   color: var(--color-accent);
@@ -112,15 +114,15 @@ body {
   font-weight: 400;
 }
 .section-title {
-  font-family: var(--serif-jp);
-  font-weight: 400;
+  font-family: var(--font-jp);
+  font-weight: 300;
   font-size: clamp(28px, 3.6vw, 44px);
   line-height: 1.4;
   letter-spacing: 0.04em;
   margin-bottom: 40px;
   color: var(--color-ink);
 }
-[data-lang="en"] .section-title { font-family: var(--serif-en); font-weight: 400; letter-spacing: 0.02em; }
+[data-lang="en"] .section-title { font-family: var(--font-en); font-weight: 300; letter-spacing: 0.01em; }
 .section-lead {
   font-size: 16px;
   line-height: 2;
@@ -168,14 +170,14 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  font-family: var(--serif-en);
+  font-family: var(--font-en);
   font-weight: 500;
   font-size: 25px;
   letter-spacing: 0.05em;
   line-height: 1;
 }
 .logo-sub {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 7.5px;
   font-weight: 500;
   letter-spacing: 0.42em;
@@ -191,7 +193,7 @@ body {
 .site-header:not(.is-scrolled) .nav a,
 .site-header:not(.is-scrolled) .lang-toggle { text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
 .logo-text {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.24em;
   font-weight: 500;
@@ -201,7 +203,7 @@ body {
   gap: 28px;
 }
 .nav a {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 13.5px;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -223,7 +225,7 @@ body {
   transition: width 0.4s var(--ease);
 }
 .nav a:hover::after { width: 100%; }
-[data-lang="ja"] .nav a { font-family: var(--sans-jp); font-size: 13px; letter-spacing: 0.12em; }
+[data-lang="ja"] .nav a { font-size: 13px; letter-spacing: 0.12em; }
 
 .header-tools {
   display: flex;
@@ -231,7 +233,7 @@ body {
   gap: 16px;
 }
 .lang-toggle {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -319,7 +321,7 @@ body {
   text-shadow: 0 0 1px rgba(0,0,0,0.40), 0 1px 3px rgba(0,0,0,0.50), 0 0 14px rgba(0,0,0,0.55), 0 0 14px rgba(0,0,0,0.45), 0 4px 30px rgba(0,0,0,0.50);
 }
 .hero-eyebrow {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.36em;
   text-transform: uppercase;
@@ -327,9 +329,9 @@ body {
   opacity: 0.85;
   font-weight: 400;
 }
-[data-lang="ja"] .hero-eyebrow { font-family: var(--sans-jp); letter-spacing: 0.2em; font-size: 12px; }
+[data-lang="ja"] .hero-eyebrow { font-family: var(--font-jp); letter-spacing: 0.2em; font-size: 12px; }
 .hero-title {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-weight: 500;
   font-size: clamp(36px, 6vw, 76px);
   line-height: 1.25;
@@ -337,31 +339,30 @@ body {
   margin-bottom: 28px;
   max-width: 800px;
 }
-/* 0902: 日本語表示でもメインコピーは英文「A Life with Art」になったため、両言語とも欧文セリフで表示 */
+/* 0902: 日本語表示でもメインコピーは英文「A Life with Art」になったため、両言語とも英語書体で表示 */
 [data-lang="ja"] .hero-title,
-[data-lang="en"] .hero-title { font-family: var(--serif-en); font-weight: 500; letter-spacing: 0.01em; }
+[data-lang="en"] .hero-title { font-family: var(--font-en); font-weight: 400; letter-spacing: 0; }
 .hero-sub {
   font-size: 18px;
   line-height: 2;
   max-width: 560px;
   color: #ffffff;
   opacity: 1;
-  /* 400と500の中間の太さに見せる（0.3pxの縁取りでわずかに太らせる）
-     ※ 0903: サブコピーは依頼外だったため 0902 以前の見え方に戻した（影も当時と同じ値を明示） */
-  -webkit-text-stroke: 0.3px #ffffff;
+  /* 0904 クライアント指摘: 縁取り(-webkit-text-stroke)で太らせるとサイト内の日本語と
+     別の書体に見えるため廃止。読みやすさは太さだけで調整する */
+  font-weight: 400;
   text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5);
   margin-bottom: 48px;
 }
-/* 0903: PC幅だけサブコピーを読みやすく（太さ500 + 黒のハロー）。スマホは上の元の見え方のまま */
+/* PC幅は明るい写真の上で沈むので、太さ500 + メインコピーと同系の柔らかい黒のハロー */
 @media (min-width: 961px) {
   .hero-sub {
     font-weight: 500;
-    -webkit-text-stroke: 0.4px #ffffff;
     text-shadow: 0 0 1px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.60), 0 0 12px rgba(0,0,0,0.50), 0 3px 24px rgba(0,0,0,0.50);
   }
 }
 .hero-cta {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.32em;
   border: 1px solid var(--color-on-dark);
@@ -420,16 +421,16 @@ body {
 .statement { background: var(--color-bg); text-align: center; padding: 140px 0; }
 .statement .section-label { display: inline-block; }
 .statement-body p {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-size: 17px;
   line-height: 2.2;
   color: var(--color-ink);
   margin-bottom: 28px;
   text-align: left;
 }
-[data-lang="en"] .statement-body p { font-family: var(--serif-en); font-size: 19px; line-height: 1.85; letter-spacing: 0.01em; }
+[data-lang="en"] .statement-body p { font-family: var(--font-en); font-size: 17px; line-height: 1.9; letter-spacing: 0; }
 .statement-signature {
-  font-family: var(--sans-en) !important;
+  font-family: var(--font-en) !important;
   font-size: 12px !important;
   letter-spacing: 0.24em;
   color: var(--color-accent) !important;
@@ -454,7 +455,7 @@ body {
   height: auto; /* 構図の左右を切らず、写真そのままの比率で見せる */
 }
 .concept-text .lead {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-size: 18px;
   line-height: 2;
   color: var(--color-ink);
@@ -463,20 +464,20 @@ body {
   border-bottom: 1px solid var(--color-line);
 }
 .concept-text .lead p + p { margin-top: 1.5em; }
-[data-lang="en"] .concept-text .lead { font-family: var(--serif-en); font-size: 20px; line-height: 1.7; }
+[data-lang="en"] .concept-text .lead { font-family: var(--font-en); font-size: 18px; line-height: 1.8; }
 .concept-list li {
   margin-bottom: 36px;
   padding-left: 0;
 }
 .concept-list h3 {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-weight: 500;
   font-size: 19px;
   letter-spacing: 0.06em;
   margin-bottom: 12px;
   color: var(--color-ink);
 }
-[data-lang="en"] .concept-list h3 { font-family: var(--serif-en); font-weight: 500; letter-spacing: 0.02em; font-size: 22px; }
+[data-lang="en"] .concept-list h3 { font-family: var(--font-en); font-weight: 500; letter-spacing: 0.01em; font-size: 19px; }
 .concept-list p {
   font-size: 15px;
   line-height: 2;
@@ -513,16 +514,15 @@ body {
 }
 .service-icon svg { width: 100%; height: 100%; }
 .service-num {
-  font-family: var(--serif-en);
-  font-style: italic;
-  font-size: 14px;
+  font-family: var(--font-en);
+  font-size: 12px;
   color: var(--color-accent);
   text-align: center; /* PCもモバイル同様に中央 */
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   margin-bottom: 16px;
 }
 .service-card h3 {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-weight: 500;
   font-size: 22px;
   text-align: center; /* PCもモバイル同様に中央 */
@@ -530,7 +530,7 @@ body {
   margin-bottom: 20px;
   line-height: 1.4;
 }
-[data-lang="en"] .service-card h3 { font-family: var(--serif-en); font-weight: 500; font-size: 26px; letter-spacing: 0.01em; }
+[data-lang="en"] .service-card h3 { font-family: var(--font-en); font-weight: 500; font-size: 22px; letter-spacing: 0.01em; }
 .service-card p {
   font-size: 14.5px;
   line-height: 2;
@@ -546,10 +546,10 @@ body {
   align-items: center;
 }
 .profile-name {
-  font-family: var(--serif-en);
-  font-weight: 500;
-  font-size: 26px;
-  letter-spacing: 0.06em;
+  font-family: var(--font-en);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.04em;
   color: var(--color-ink);
   margin-bottom: 28px;
 }
@@ -577,13 +577,13 @@ body {
   align-items: baseline;
 }
 .profile-meta dt {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.24em;
   color: var(--color-accent);
   text-transform: uppercase;
 }
-[data-lang="ja"] .profile-meta dt { font-family: var(--sans-jp); letter-spacing: 0.12em; font-size: 12px; }
+[data-lang="ja"] .profile-meta dt { font-family: var(--font-jp); letter-spacing: 0.12em; font-size: 12px; }
 .profile-meta dd {
   font-size: 14.5px;
   line-height: 1.9;
@@ -665,7 +665,7 @@ body {
   transform: translateY(-3px);
 }
 .contact-label {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 10px;
   letter-spacing: 0.32em;
   color: var(--color-accent);
@@ -673,9 +673,9 @@ body {
   font-weight: 500;
 }
 .contact-value {
-  font-family: var(--serif-en);
-  font-size: 18px;
-  letter-spacing: 0.04em;
+  font-family: var(--font-en);
+  font-size: 16px;
+  letter-spacing: 0.02em;
   color: var(--color-ink);
   margin-bottom: 12px;
 }
@@ -703,7 +703,7 @@ body {
   flex-wrap: wrap;
 }
 .footer-logo {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 14px;
   letter-spacing: 0.24em;
   color: var(--color-on-dark);
@@ -711,12 +711,12 @@ body {
   font-weight: 500;
 }
 .footer-tagline {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-size: 13px;
   letter-spacing: 0.06em;
   opacity: 0.7;
 }
-[data-lang="en"] .footer-tagline { font-family: var(--serif-en); }
+[data-lang="en"] .footer-tagline { font-family: var(--font-en); }
 .footer-meta {
   text-align: right;
   font-size: 12px;
@@ -834,21 +834,21 @@ body {
   background: var(--color-surface);
 }
 .journal-notice-label {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.32em;
   color: var(--color-accent);
   margin-bottom: 20px;
 }
 .journal-notice-title {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-weight: 400;
   font-size: 24px;
   line-height: 1.6;
   letter-spacing: 0.04em;
   margin-bottom: 24px;
 }
-[data-lang="en"] .journal-notice-title { font-family: var(--serif-en); font-size: 27px; }
+[data-lang="en"] .journal-notice-title { font-family: var(--font-en); font-size: 24px; }
 .journal-notice-text {
   font-size: 15px;
   line-height: 2;
@@ -903,16 +903,32 @@ body {
   display: flex;
   align-items: flex-end;
   background-size: cover;
-  background-position: center;
+  background-position: center var(--hero-focus, 50%);
   padding: 160px 0 64px;
 }
 /* Contact: 高さ上限(85svh)で上下が切れる際、作品「What me worry?」が帯の中央に来る位置 */
-.page-hero.hero-pos-contact { background-position: center 30%; }
+.hero-pos-contact { --hero-focus: 30%; --hero-focus-pc: 35%; }
+/* Services(PC): 人物の頭がナビ帯にかからない位置 */
+.hero-pos-services { --hero-focus-pc: 40%; }
 .page-hero-overlay {
   position: absolute;
   inset: 0;
   /* 全面を暗くせず、タイトルが乗る下端だけ暗くする（可読性は文字影で担保） */
   background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0) 0%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
+}
+/* 0904 クライアント指摘（PC）:
+   ・写真を引きで広く見せる。高さを画面の76%で頭打ちにすると横長の帯になり、
+     写真が拡大されて上下が切れていた。最初の1画面を「ヘッダー＋画面下端までの写真」にし、
+     被写体が切れない縦位置をページごとに --hero-focus-pc で指定する
+   ・黒フィルターはかけない（写真は明るいまま。タイトルの可読性は文字の影で担保）
+   スマホは従来の見え方のまま */
+@media (min-width: 961px) {
+  .page-hero {
+    height: 100svh;
+    min-height: 560px;
+    background-position: center var(--hero-focus-pc, var(--hero-focus, 50%));
+  }
+  .page-hero-overlay { background: none; }
 }
 .page-hero-inner {
   /* 画像が画面より高い場合でも、タイトルが最初の画面内に見えるように
@@ -924,21 +940,20 @@ body {
   color: var(--color-on-dark);
 }
 .page-hero-label {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.34em;
   margin-bottom: 14px;
   opacity: 0.85;
 }
 .page-hero-title {
-  font-family: var(--serif-jp);
-  font-weight: 400;
+  font-family: var(--font-en);
+  font-weight: 300;
   font-size: clamp(28px, 4vw, 44px);
   letter-spacing: 0.06em;
   line-height: 1.4;
   text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 18px rgba(0,0,0,0.5);
 }
-[data-lang="en"] .page-hero-title { font-family: var(--serif-en); font-weight: 500; }
 
 /* ===== Journal ===== */
 .journal { background: var(--color-bg); }
@@ -968,20 +983,20 @@ body {
 .journal-item:hover .journal-thumb img { transform: scale(1.04); }
 .journal-body { padding: 28px 28px 32px; }
 .journal-date {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 10px;
   letter-spacing: 0.28em;
   color: var(--color-accent);
   margin-bottom: 12px;
 }
 .journal-title {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-weight: 500;
   font-size: 19px;
   line-height: 1.6;
   margin-bottom: 12px;
 }
-[data-lang="en"] .journal-title { font-family: var(--serif-en); font-size: 21px; }
+[data-lang="en"] .journal-title { font-family: var(--font-en); font-size: 19px; }
 .journal-excerpt {
   font-size: 13.5px;
   line-height: 1.9;
@@ -989,7 +1004,7 @@ body {
   margin-bottom: 18px;
 }
 .journal-more {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 10.5px;
   letter-spacing: 0.22em;
   color: var(--color-ink);
@@ -1000,8 +1015,8 @@ body {
 /* ===== Calendar ===== */
 .calendar { background: var(--color-bg); }
 .calendar-year {
-  font-family: var(--serif-en);
-  font-weight: 400;
+  font-family: var(--font-en);
+  font-weight: 300;
   font-size: 28px;
   letter-spacing: 0.14em;
   text-align: center;
@@ -1017,13 +1032,13 @@ body {
   border-bottom: 1px solid var(--color-line-soft);
 }
 .calendar-month-label {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-weight: 400;
   font-size: 22px;
   letter-spacing: 0.08em;
   color: var(--color-accent);
 }
-[data-lang="en"] .calendar-month-label { font-family: var(--serif-en); font-weight: 500; }
+[data-lang="en"] .calendar-month-label { font-family: var(--font-en); font-weight: 400; }
 .calendar-month ul {
   display: flex;
   flex-direction: column;
@@ -1039,7 +1054,7 @@ body {
 }
 .calendar-month li:last-child { border-bottom: 0; padding-bottom: 0; }
 .fair-name {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-size: 16.5px;
   letter-spacing: 0.04em;
 }
@@ -1050,7 +1065,7 @@ body {
   transition: border-color 0.2s ease;
 }
 .fair-name a:hover { border-bottom-color: currentColor; }
-[data-lang="en"] .fair-name { font-family: var(--serif-en); font-size: 18px; }
+[data-lang="en"] .fair-name { font-family: var(--font-en); font-size: 16.5px; }
 .fair-meta {
   display: flex;
   align-items: baseline;
@@ -1058,7 +1073,7 @@ body {
   flex-shrink: 0;
 }
 .fair-city {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1066,7 +1081,7 @@ body {
   white-space: nowrap;
 }
 .fair-date {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 12px;
   letter-spacing: 0.08em;
   color: var(--color-ink);
@@ -1099,14 +1114,14 @@ body {
 .form-field { margin-bottom: 32px; }
 .form-field label {
   display: block;
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.24em;
   color: var(--color-ink-soft);
   margin-bottom: 10px;
   text-transform: uppercase;
 }
-[data-lang="ja"] .form-field label { font-family: var(--sans-jp); letter-spacing: 0.18em; }
+[data-lang="ja"] .form-field label { font-family: var(--font-jp); letter-spacing: 0.18em; }
 .form-field label em {
   font-style: normal;
   color: var(--color-accent);
@@ -1133,7 +1148,7 @@ body {
 }
 .form-submit { text-align: center; margin-top: 8px; }
 .form-button {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 12px;
   letter-spacing: 0.28em;
   border: 1px solid var(--color-ink);
@@ -1181,18 +1196,18 @@ body {
   padding: 22px 2px;
 }
 .contact-line-label {
-  font-family: var(--sans-en);
+  font-family: var(--font-en);
   font-size: 11px;
   letter-spacing: 0.28em;
   color: var(--color-accent);
 }
 .contact-line-value {
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp);
   font-size: 15.5px;
   letter-spacing: 0.04em;
   text-align: right;
 }
-[data-lang="en"] .contact-line-value { font-family: var(--serif-en); font-size: 16.5px; }
+[data-lang="en"] .contact-line-value { font-family: var(--font-en); font-size: 15.5px; }
 .contact-sns {
   text-align: center;
   margin: 40px 0 8px;
@@ -1256,7 +1271,7 @@ body {
   border-radius: 50%;
   border: 1px solid var(--color-accent);
   color: var(--color-accent);
-  font-family: var(--serif-en);
+  font-family: var(--font-en);
   font-size: 22px;
   overflow: hidden;
   display: grid;
