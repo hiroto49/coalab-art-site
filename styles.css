@@ -320,6 +320,23 @@ body {
   /* 写真は暗くせず、文字側の柔らかい黒のハローだけで可読性を確保（ラフの見え方に合わせる） */
   text-shadow: 0 0 1px rgba(0,0,0,0.40), 0 1px 3px rgba(0,0,0,0.50), 0 0 14px rgba(0,0,0,0.55), 0 0 14px rgba(0,0,0,0.45), 0 4px 30px rgba(0,0,0,0.50);
 }
+/* 1104 クライアント指示: 白っぽい写真の上で文字が見えづらいので、文字ブロックの後ろに
+   薄いグレーの影（境界のない楕円のぼかし）を敷く。写真全体は暗くしない */
+.hero-content::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -120px;
+  top: 50%;
+  width: 920px;
+  height: min(560px, 100%);
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: radial-gradient(ellipse at 42% 50%, rgba(40,40,40,0.62) 0%, rgba(40,40,40,0.44) 30%, rgba(40,40,40,0.18) 55%, rgba(40,40,40,0) 72%);
+}
+@media (max-width: 640px) {
+  .hero-content::before { left: -80px; width: 130vw; height: 480px; }
+}
 .hero-eyebrow {
   font-family: var(--font-en);
   font-size: 11px;
@@ -907,28 +924,22 @@ body {
   padding: 160px 0 64px;
 }
 /* Contact: 高さ上限(85svh)で上下が切れる際、作品「What me worry?」が帯の中央に来る位置 */
-.hero-pos-contact { --hero-focus: 30%; --hero-focus-pc: 35%; }
-/* Services(PC): 人物の頭がナビ帯にかからない位置 */
-.hero-pos-services { --hero-focus-pc: 40%; }
+.hero-pos-contact { --hero-focus: 30%; }
 .page-hero-overlay {
   position: absolute;
   inset: 0;
   /* 全面を暗くせず、タイトルが乗る下端だけ暗くする（可読性は文字影で担保） */
   background: linear-gradient(to bottom, rgba(var(--overlay-rgb),0) 0%, rgba(var(--overlay-rgb),0) 55%, rgba(var(--overlay-rgb),0.42) 100%);
 }
-/* 0904 クライアント指摘（PC）:
-   ・写真を引きで広く見せる。高さを画面の76%で頭打ちにすると横長の帯になり、
-     写真が拡大されて上下が切れていた。最初の1画面を「ヘッダー＋画面下端までの写真」にし、
-     被写体が切れない縦位置をページごとに --hero-focus-pc で指定する
-   ・黒フィルターはかけない（写真は明るいまま。タイトルの可読性は文字の影で担保）
-   スマホは従来の見え方のまま */
+/* 1104 クライアント指示: 下層ページのトップ画像は公開中の幅・高さ（76svh 上限）のまま。
+   Contact のみ、画面を最大化していない窓でも作品「What me worry?」が上下とも切れずに
+   収まるよう、PC では高さの下限を幅基準（44vw）で確保し、作品が帯の中央に来る位置に焦点を置く。
+   （写真の幅は変えない。高さが足りない分だけ少し縦に伸ばす） */
 @media (min-width: 961px) {
-  .page-hero {
-    height: 100svh;
-    min-height: 560px;
-    background-position: center var(--hero-focus-pc, var(--hero-focus, 50%));
+  .page-hero.hero-pos-contact {
+    height: min(calc(100vw / var(--hero-ar, 1.333)), max(76svh, 44vw));
+    --hero-focus: 37%;
   }
-  .page-hero-overlay { background: none; }
 }
 .page-hero-inner {
   /* 画像が画面より高い場合でも、タイトルが最初の画面内に見えるように
