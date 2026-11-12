@@ -19,7 +19,8 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    # お名前.com が GitHub (海外) からの FTP を遮断しているため、国内の Mac 上の self-hosted runner で実行
+    runs-on: [self-hosted, coalab-jp]
     steps:
       - uses: actions/checkout@v4
 
