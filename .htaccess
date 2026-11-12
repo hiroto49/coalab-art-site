@@ -23,7 +23,8 @@ RewriteRule ^(service|services|service-1|services-1|projects|works)/?$          
 RewriteRule ^(contact|contact-1|contact-us|contactus|inquiry)/?$                   /contact.html  [R=301,L,NC]
 RewriteRule ^(journal|blog|news|column|post|post/.*|blog/.*)/?$                    /journal.html  [R=301,L,NC]
 RewriteRule ^(calendar|calender|fair|fairs|art-fair|artfair|schedule|events?)/?$   /calendar.html [R=301,L,NC]
-RewriteRule ^(home|index|top|blank|blank-1|ja|jp|en|english)/?$                    /              [R=301,L,NC]
+RewriteRule ^(en|english)/?$                                                       /?lang=en      [R=302,L,NC]
+RewriteRule ^(home|index|top|blank|blank-1|ja|jp)/?$                               /              [R=301,L,NC]
 </IfModule>
 
 # --- キャッシュ制御：HTML は毎回確認、画像・CSS・JS は長めに ---

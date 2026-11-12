@@ -12,7 +12,17 @@
     try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
   };
 
+  // URL の ?lang=en / ?lang=ja を最優先（名刺・SNS から英語版を直接開けるように）
+  const urlLang = (() => {
+    try {
+      const v = new URLSearchParams(location.search).get('lang');
+      if (v === 'ja' || v === 'en') return v;
+    } catch (e) {}
+    return null;
+  })();
+
   const initialLang = (() => {
+    if (urlLang) return urlLang;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored === 'ja' || stored === 'en') return stored;
@@ -24,7 +34,16 @@
   if (langToggle) {
     langToggle.addEventListener('click', () => {
       const current = html.getAttribute('data-lang') || 'ja';
-      applyLang(current === 'ja' ? 'en' : 'ja');
+      const next = current === 'ja' ? 'en' : 'ja';
+      applyLang(next);
+      // ?lang= 付きで開いていた場合は URL も合わせて書き換え（再読み込みで戻らないように）
+      if (urlLang) {
+        try {
+          const u = new URL(location.href);
+          u.searchParams.set('lang', next);
+          history.replaceState(null, '', u);
+        } catch (e) {}
+      }
     });
   }
 
