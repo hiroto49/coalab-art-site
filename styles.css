@@ -318,6 +318,23 @@ body {
   /* 写真は暗くせず、文字側の柔らかい黒のハローだけで可読性を確保（ラフの見え方に合わせる） */
   text-shadow: 0 0 1px rgba(0,0,0,0.40), 0 1px 3px rgba(0,0,0,0.50), 0 0 14px rgba(0,0,0,0.55), 0 0 14px rgba(0,0,0,0.45), 0 4px 30px rgba(0,0,0,0.50);
 }
+/* 1104 クライアント指示: 白っぽい写真の上で文字が見えづらいので、文字ブロックの後ろに
+   薄いグレーの影（境界のない楕円のぼかし）を敷く。写真全体は暗くしない */
+.hero-content::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -120px;
+  top: 50%;
+  width: 920px;
+  height: min(560px, 100%);
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: radial-gradient(ellipse at 42% 50%, rgba(40,40,40,0.62) 0%, rgba(40,40,40,0.44) 30%, rgba(40,40,40,0.18) 55%, rgba(40,40,40,0) 72%);
+}
+@media (max-width: 640px) {
+  .hero-content::before { left: -80px; width: 130vw; height: 480px; }
+}
 .hero-eyebrow {
   font-family: var(--sans-en);
   font-size: 11px;
@@ -908,6 +925,15 @@ body {
 }
 /* Contact: 高さ上限(85svh)で上下が切れる際、作品「What me worry?」が帯の中央に来る位置 */
 .page-hero.hero-pos-contact { background-position: center 30%; }
+/* 1104 クライアント指示: Contact のみ、画面を最大化していない窓でも作品「What me worry?」が
+   上下とも切れずに収まるよう、PC では高さの下限を幅基準（44vw）で確保し、作品が帯の中央に来る
+   位置に焦点を置く。写真の幅は変えない（高さが足りない分だけ少し縦に伸ばす） */
+@media (min-width: 961px) {
+  .page-hero.hero-pos-contact {
+    height: min(calc(100vw / var(--hero-ar, 1.333)), max(76svh, 44vw));
+    background-position: center 37%;
+  }
+}
 .page-hero-overlay {
   position: absolute;
   inset: 0;
